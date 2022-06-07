@@ -21,7 +21,10 @@ const Main = () => {
 
             return (
               <article key={movie.id} className="movie-card">
-                <Link to={`/movie/${movie.id}-${urlName}`} state={movie.id}>
+                <Link
+                  to={`/entertainment-database-react-app/movie/${movie.id}-${urlName}`}
+                  state={movie.id}
+                >
                   <img
                     src={`https://www.themoviedb.org/t/p/w440_and_h660_face${movie.poster_path}`}
                     alt={`${movie.original_name} poster`}
@@ -47,7 +50,9 @@ const Main = () => {
                   alt={`${movie.original_name} poster`}
                   className="movie-poster"
                 />
-                <Link to={`/movie/${movie.id}`}>
+                <Link
+                  to={`/entertainment-database-react-app/movie/${movie.id}`}
+                >
                   <h4 className="movie-card-title">{movie.original_name}</h4>
                 </Link>
               </article>

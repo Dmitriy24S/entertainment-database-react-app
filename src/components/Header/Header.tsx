@@ -12,27 +12,27 @@ const Header = () => {
   return (
     <header className="App-header">
       <div className="header-content">
-        <Link to={"/"}>
+        <Link to={"/entertainment-database-react-app"}>
           <img src={Logo} alt="" />
         </Link>
         <ul className="nav-menu">
           <li>
-            <Link to={"/"}>
+            <Link to={"/entertainment-database-react-app"}>
               <img src={NavHomeIcon} alt="" />
             </Link>
           </li>
           <li>
-            <Link to={"/"}>
+            <Link to={"/entertainment-database-react-app/movies"}>
               <img src={NavMoviesIcon} alt="" />
             </Link>
           </li>
           <li>
-            <Link to={"/"}>
+            <Link to={"/entertainment-database-react-app/tv"}>
               <img src={NavTvIcon} alt="" />
             </Link>
           </li>
           <li>
-            <Link to={"/bookmarks"}>
+            <Link to={"/entertainment-database-react-app/bookmarks"}>
               <img src={NavBookmarkIcon} alt="" />
             </Link>
           </li>

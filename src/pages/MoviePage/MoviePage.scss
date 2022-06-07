@@ -1,0 +1,135 @@
+.return-btn {
+  opacity: 0.9;
+  transition: opacity 150ms ease-in-out;
+  display: flex;
+  padding: 0.5rem;
+  width: min-content;
+  left: -1rem;
+  position: relative;
+  svg {
+    font-size: 2rem;
+  }
+  &:hover {
+    opacity: 1;
+  }
+}
+
+.movie-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  align-items: flex-start;
+  margin-top: 1rem;
+  @media (min-width: 640px) {
+    flex-direction: row;
+  }
+}
+.movie-poster-full {
+  width: 16rem;
+  margin: 0 auto;
+  @media (min-width: 640px) {
+    margin: 0;
+  }
+}
+.movie-title {
+  font-size: 1.4rem;
+  font-weight: 500;
+}
+.movie-info {
+  padding: 1.5rem 0 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  max-width: 31rem;
+}
+.movie-year {
+  color: hsl(0, 0%, 80%);
+}
+.short-list {
+  display: flex;
+  gap: 1.5rem;
+  font-size: 0.9rem;
+  color: hsl(0, 0%, 80%);
+}
+// short list - dot separator
+.short-list li::before {
+  content: "\2022"; /* Add content: \2022 is the CSS Code/unicode for a bullet */
+  color: white; /* Change the color */
+  font-weight: bold; /* If you want it to be bold */
+  display: inline-block; /* Needed to add space between the bullet and the text */
+  width: 1em; /* Also needed for space (tweak if needed) */
+  margin-left: -1em; /* Also needed for space (tweak if needed) */
+}
+.short-list li:first-child::before {
+  content: none;
+}
+
+.movie-interaction-menu {
+  margin-top: 1rem;
+  // Movie user score
+  .movie-user-rating {
+    display: flex;
+    align-items: center;
+    gap: 0.7rem;
+    .user-rating-title {
+      font-weight: 500;
+      font-size: 1rem;
+    }
+    .circle-container {
+      width: 80px;
+      .CircularProgressbar-text {
+        font-weight: 700;
+      }
+    }
+  }
+}
+
+.movie-tagline {
+  font-size: 0.9rem;
+  margin-top: 1rem;
+  font-style: italic;
+  opacity: 80%;
+}
+
+.overview-title {
+  font-size: 1.3rem;
+  margin-top: 0.5rem;
+}
+
+.movie-description {
+  font-size: 0.9rem;
+}
+
+// Cast
+.movie-cast-info {
+  margin-top: 2rem;
+  .cast-title {
+    font-size: 1.3rem;
+    font-size: 500;
+  }
+  .cast-container {
+    margin-top: 1rem;
+    display: flex;
+    overflow-x: scroll;
+    gap: 1.3rem;
+    .cast-member-card {
+      margin-bottom: 1rem;
+      min-width: 8rem;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      background-color: rgb(25 33 52);
+      border-radius: 10px;
+      .names-container {
+        padding: 0.7rem;
+      }
+      .actor-name {
+        font-size: 1rem;
+      }
+      .character-name {
+        margin-top: 0.5rem;
+        font-size: 1rem;
+      }
+    }
+  }
+}

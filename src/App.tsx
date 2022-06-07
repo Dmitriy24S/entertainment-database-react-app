@@ -39,8 +39,26 @@ function App() {
           <Header />
           <main className="App-main">
             <Routes>
-              <Route path="/" element={<Main />} />
-              <Route path="/movie/:id" element={<MoviePage />} />
+              <Route
+                path="/entertainment-database-react-app"
+                element={<Main />}
+              />
+              <Route
+                path="/entertainment-database-react-app/movie/:id"
+                element={<MoviePage />}
+              />
+              <Route
+                path="/entertainment-database-react-app/movies"
+                // element={<Movies />}
+              />
+              <Route
+                path="/entertainment-database-react-app/tv"
+                // element={<Tv />}
+              />
+              <Route
+                path="/entertainment-database-react-app/bookmarks"
+                // element={<Bookmarks />}
+              />
             </Routes>
           </main>
         </BrowserRouter>
