@@ -11,33 +11,37 @@ import "./Header.scss";
 const Header = () => {
   return (
     <header className="App-header">
-      <div className="header-content">
-        <Link to={"/entertainment-database-react-app"}>
-          <img src={Logo} alt="" />
-        </Link>
-        <ul className="nav-menu">
-          <li>
+      <div className="header-container">
+        <div className="header-inner">
+          <div className="header-content">
             <Link to={"/entertainment-database-react-app"}>
-              <img src={NavHomeIcon} alt="" />
+              <img src={Logo} alt="" />
             </Link>
-          </li>
-          <li>
-            <Link to={"/entertainment-database-react-app/movies"}>
-              <img src={NavMoviesIcon} alt="" />
-            </Link>
-          </li>
-          <li>
-            <Link to={"/entertainment-database-react-app/tv"}>
-              <img src={NavTvIcon} alt="" />
-            </Link>
-          </li>
-          <li>
-            <Link to={"/entertainment-database-react-app/bookmarks"}>
-              <img src={NavBookmarkIcon} alt="" />
-            </Link>
-          </li>
-        </ul>
-        <img src={ProfileIcon} alt="" className="user-profile-icon" />
+            <ul className="nav-menu">
+              <li>
+                <Link to={"/entertainment-database-react-app"}>
+                  <img src={NavHomeIcon} alt="" />
+                </Link>
+              </li>
+              <li>
+                <Link to={"/entertainment-database-react-app/movies"}>
+                  <img src={NavMoviesIcon} alt="" />
+                </Link>
+              </li>
+              <li>
+                <Link to={"/entertainment-database-react-app/tv"}>
+                  <img src={NavTvIcon} alt="" />
+                </Link>
+              </li>
+              <li>
+                <Link to={"/entertainment-database-react-app/bookmarks"}>
+                  <img src={NavBookmarkIcon} alt="" />
+                </Link>
+              </li>
+            </ul>
+            <img src={ProfileIcon} alt="" className="user-profile-icon" />
+          </div>
+        </div>
       </div>
     </header>
   );

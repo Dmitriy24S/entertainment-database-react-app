@@ -3,6 +3,8 @@
   display: flex;
   color: white;
   flex-direction: column;
+  max-width: 69rem;
+  margin: 0 auto;
   @media (min-width: 850px) {
     flex-direction: row;
   }
@@ -17,16 +19,19 @@
   padding-top: 1rem;
   flex-grow: 2;
   width: 100%;
-  max-width: 57rem;
+  max-width: 65rem;
   overflow-x: hidden;
   margin: 0 auto;
+  @media (min-width: 850px) {
+    padding-top: 2rem;
+  }
   .list {
     display: flex;
     flex-direction: column;
-    max-width: 57rem;
+    max-width: 65rem;
     width: 100%;
     margin: 0 auto;
-    margin-top: 2rem;
+    margin-bottom: 2rem;
     .list-name {
       text-align: left;
       text-transform: capitalize;
@@ -35,18 +40,27 @@
     }
     .list-items {
       gap: 1.2rem;
-      display: flex;
+      margin-top: 1rem;
       overflow-y: hidden;
       overflow-x: scroll;
       scroll-snap-type: x mandatory;
+      display: grid;
+      grid-auto-flow: column;
+      grid-auto-columns: 17%;
+      @media (max-width: 920px) {
+        grid-auto-columns: 24%;
+      }
+      @media (max-width: 600px) {
+        grid-auto-columns: 33%;
+      }
     }
     .movie-poster {
       border-radius: 10px;
       scroll-snap-align: start;
-      min-height: calc(150px * 1.5);
-      height: calc(150px * 1.5);
+      width: 100%;
     }
     .movie-card {
+      max-width: 245px;
       position: relative;
       margin-bottom: 0.1rem;
       &:hover .movie-card-title {
