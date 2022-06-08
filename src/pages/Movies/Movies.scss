@@ -1,0 +1,49 @@
+.movie-list-container {
+  margin-top: 1rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.3rem;
+  .movie-card {
+    margin-bottom: 1rem;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    background-color: rgb(25 33 52);
+    border-radius: 10px;
+    padding-bottom: 2rem;
+    flex: 1 19%;
+    @media (max-width: 920px) {
+      flex: 1 25%;
+    }
+    @media (max-width: 600px) {
+      flex: 1 47%;
+    }
+    .movie-card-poster {
+      object-fit: cover;
+      height: 294px; // if no img placement card spacing fix? text positioning
+    }
+    .movie-info {
+      position: relative;
+      margin-top: 2rem;
+      padding: 0.7rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      .movie-release-date {
+        margin-top: 0.5rem;
+        font-size: 0.9rem;
+        color: hsl(250, 14%, 68%);
+      }
+      .user-score-container {
+        position: absolute;
+        top: -3.5rem;
+        width: 50px;
+      }
+    }
+  }
+}
+.pagination {
+  margin: 0 auto;
+  justify-content: center;
+  //   width: 100%;
+}

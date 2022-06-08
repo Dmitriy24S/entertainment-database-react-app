@@ -39,7 +39,6 @@ const MoviePage = () => {
       }
     };
     fetchData();
-    console.log(movieData);
   }, []);
 
   const calcRuntime = (minutesRuntime: number) => {
@@ -93,10 +92,11 @@ const MoviePage = () => {
               <div className="movie-interaction-menu">
                 <div className="movie-user-rating">
                   {/* Movie user score rating circle */}
-                  <div className="circle-container">
+                  <div className="user-score-container">
                     <CircularProgressbar
                       value={userScore}
                       text={`${userScore}%`}
+                      background
                       styles={buildStyles({
                         // Whether to use rounded or flat corners on the ends - can use 'butt' or 'round'
                         strokeLinecap: "butt",
@@ -111,7 +111,7 @@ const MoviePage = () => {
                         }`,
                         textColor: "white",
                         trailColor: "#3f3e3e",
-                        backgroundColor: "#c0c73e",
+                        backgroundColor: "#0a071d",
                       })}
                     />
                   </div>

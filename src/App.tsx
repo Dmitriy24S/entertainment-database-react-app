@@ -2,9 +2,20 @@ import React, { createContext, useEffect, useState } from "react";
 import "./App.scss";
 import axios from "axios";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Header from "./components/Header/Header";
 import Main from "./pages/Main/Main";
 import MoviePage from "./pages/MoviePage/MoviePage";
-import Header from "./components/Header/Header";
+import TvShows from "./pages/TvShows/TvShows";
+import Movies from "./pages/Movies/Movies";
+import Bookmarks from "./pages/Bookmarks/Bookmarks";
+
+import { ThemeProvider, createTheme } from "@mui/material/styles";
+
+const darkTheme = createTheme({
+  palette: {
+    mode: "dark",
+  },
+});
 
 export const AppContext = createContext({});
 
@@ -34,35 +45,37 @@ function App() {
 
   return (
     <AppContext.Provider value={{ dataPopularMovies, dataTrendingTv }}>
-      <div className="App">
-        <BrowserRouter>
-          <Header />
-          <main className="App-main">
-            <Routes>
-              <Route
-                path="/entertainment-database-react-app"
-                element={<Main />}
-              />
-              <Route
-                path="/entertainment-database-react-app/movie/:id"
-                element={<MoviePage />}
-              />
-              <Route
-                path="/entertainment-database-react-app/movies"
-                // element={<Movies />}
-              />
-              <Route
-                path="/entertainment-database-react-app/tv"
-                // element={<Tv />}
-              />
-              <Route
-                path="/entertainment-database-react-app/bookmarks"
-                // element={<Bookmarks />}
-              />
-            </Routes>
-          </main>
-        </BrowserRouter>
-      </div>
+      <ThemeProvider theme={darkTheme}>
+        <div className="App">
+          <BrowserRouter>
+            <Header />
+            <main className="App-main">
+              <Routes>
+                <Route
+                  path="/entertainment-database-react-app"
+                  element={<Main />}
+                />
+                <Route
+                  path="/entertainment-database-react-app/movie/:id"
+                  element={<MoviePage />}
+                />
+                <Route
+                  path="/entertainment-database-react-app/movies"
+                  element={<Movies />}
+                />
+                <Route
+                  path="/entertainment-database-react-app/tv"
+                  element={<TvShows />}
+                />
+                <Route
+                  path="/entertainment-database-react-app/bookmarks"
+                  element={<Bookmarks />}
+                />
+              </Routes>
+            </main>
+          </BrowserRouter>
+        </div>
+      </ThemeProvider>
     </AppContext.Provider>
   );
 }

@@ -75,7 +75,7 @@
       font-weight: 500;
       font-size: 1rem;
     }
-    .circle-container {
+    .user-score-container {
       width: 80px;
       .CircularProgressbar-text {
         font-weight: 700;
@@ -110,11 +110,14 @@
   .cast-container {
     margin-top: 1rem;
     display: flex;
-    overflow-x: scroll;
     gap: 1.3rem;
+    overflow-x: scroll;
+    scroll-snap-type: x mandatory; // scroll snap part 1
     .cast-member-card {
+      scroll-snap-align: start; // scroll snap part 2
       margin-bottom: 1rem;
       min-width: 8rem;
+      min-height: 294px; // no image placement spacing for card?
       display: flex;
       flex-direction: column;
       overflow: hidden;
