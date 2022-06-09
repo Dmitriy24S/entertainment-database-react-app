@@ -1,6 +1,6 @@
 {
   "files": {
-    "main.css": "/entertainment-database-react-app/static/css/main.1afe32d9.css",
+    "main.css": "/entertainment-database-react-app/static/css/main.a5157495.css",
     "main.js": "/entertainment-database-react-app/static/js/main.6105ba02.js",
     "static/js/787.14dd3a0f.chunk.js": "/entertainment-database-react-app/static/js/787.14dd3a0f.chunk.js",
     "index.html": "/entertainment-database-react-app/index.html",
@@ -9,12 +9,12 @@
     "static/media/icon-nav-home.svg": "/entertainment-database-react-app/static/media/icon-nav-home.8acf660248afc7a27879c9c9bf218722.svg",
     "static/media/logo.svg": "/entertainment-database-react-app/static/media/logo.7d4aedc9f44f15655a966567c57a1f37.svg",
     "static/media/icon-nav-tv-series.svg": "/entertainment-database-react-app/static/media/icon-nav-tv-series.c22fe1629b446365f6f7829a014453f8.svg",
-    "main.1afe32d9.css.map": "/entertainment-database-react-app/static/css/main.1afe32d9.css.map",
+    "main.a5157495.css.map": "/entertainment-database-react-app/static/css/main.a5157495.css.map",
     "main.6105ba02.js.map": "/entertainment-database-react-app/static/js/main.6105ba02.js.map",
     "787.14dd3a0f.chunk.js.map": "/entertainment-database-react-app/static/js/787.14dd3a0f.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.1afe32d9.css",
+    "static/css/main.a5157495.css",
     "static/js/main.6105ba02.js"
   ]
 }
