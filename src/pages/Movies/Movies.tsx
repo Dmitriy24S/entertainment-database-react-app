@@ -1,16 +1,21 @@
-import axios from "axios";
-import React, { useEffect, useState } from "react";
 import Pagination from "@mui/material/Pagination";
 import Stack from "@mui/material/Stack";
-import "./Movies.scss";
+import axios from "axios";
+import React, { useContext, useEffect, useState } from "react";
 import { buildStyles, CircularProgressbar } from "react-circular-progressbar";
+import { AppContext } from "../../App";
+import NavBookmarkIcon from "../../images/icon-nav-bookmark.svg";
+import "./Movies.scss";
 
 const Movies = () => {
+  const { addToBookmarks, checkInBookmarksStatus } =
+    useContext<any>(AppContext);
   const [nowPlayingMovies, setNowPlayingMovies] = useState<any>();
   const [selectedPage, setSelectedPage] = useState(1);
   const apiUrl = "https://api.themoviedb.org/3/movie/now_playing?api_key=";
   const apiKey = "b0574de2203f781e1f1bc82abcf3cd8d";
 
+  // Fetch now playing movie list on page load
   useEffect(() => {
     const fetchNowPlayingMoviesData = async () => {
       try {
@@ -26,10 +31,12 @@ const Movies = () => {
     fetchNowPlayingMoviesData();
   }, [selectedPage]);
 
+  // Scroll to top on page change
   useEffect(() => {
     window.scrollTo({ top: 0 });
   }, [selectedPage]);
 
+  // Update selected page in pagination
   const handleChange = (event: React.ChangeEvent<unknown>, value: number) => {
     setSelectedPage(value);
   };
@@ -44,6 +51,24 @@ const Movies = () => {
               const userScore = item?.vote_average * 10;
               return (
                 <article className="movie-card" key={item.id}>
+                  {/* Bookmark button */}
+                  {checkInBookmarksStatus(item) ? (
+                    <button
+                      onClick={() => addToBookmarks(item)}
+                      className="bookmark-btn unbookmark"
+                      aria-label="remove from bookmarks this movie"
+                    >
+                      <img src={NavBookmarkIcon} alt="" />
+                    </button>
+                  ) : (
+                    <button
+                      onClick={() => addToBookmarks(item)}
+                      className="bookmark-btn"
+                      aria-label="add bookmark this movie"
+                    >
+                      <img src={NavBookmarkIcon} alt="" />
+                    </button>
+                  )}
                   <img
                     src={`https://www.themoviedb.org/t/p/w440_and_h660_face${item?.poster_path}`}
                     alt=""

@@ -1,26 +1,29 @@
 import axios from "axios";
-import React, { useEffect, useState } from "react";
-import { Link, useLocation, useParams } from "react-router-dom";
-import { IoMdArrowBack } from "react-icons/io";
+import React, { useContext, useEffect, useState } from "react";
 import { buildStyles, CircularProgressbar } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
+import { IoMdArrowBack } from "react-icons/io";
+import { Link, useLocation } from "react-router-dom";
+import { AppContext } from "../../App";
+import NavBookmarkIcon from "../../images/icon-nav-bookmark.svg";
 import "./MoviePage.scss";
 
 const MoviePage = () => {
+  const { addToBookmarks, checkInBookmarksStatus } =
+    useContext<any>(AppContext);
   const [movieData, setMovieData] = useState<any>();
+  const [castData, setCastData] = useState<any>();
+
   // const { id } = useParams();
   // 338953-fantastic-beasts-the-secrets-of-dumbledore
-
   const { state } = useLocation(); // 338953 - movie id
-
-  const [castData, setCastData] = useState<any>();
   const userScore = movieData?.vote_average * 10;
-
   const apiUrl = "https://api.themoviedb.org/3";
   const apiKey = "b0574de2203f781e1f1bc82abcf3cd8d";
   const apiCastProfileImgUrl =
     "https://www.themoviedb.org/t/p/w276_and_h350_face";
 
+  // Fetch movie/cast data on page load
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -118,6 +121,24 @@ const MoviePage = () => {
                   <h5 className="user-rating-title">
                     User <br /> Score
                   </h5>
+                  {/* Bookmark button */}
+                  {checkInBookmarksStatus(movieData) ? (
+                    <button
+                      onClick={() => addToBookmarks(movieData)}
+                      className="bookmark-btn unbookmark"
+                      aria-label="remove from bookmarks this movie"
+                    >
+                      <img src={NavBookmarkIcon} alt="" />
+                    </button>
+                  ) : (
+                    <button
+                      onClick={() => addToBookmarks(movieData)}
+                      className="bookmark-btn"
+                      aria-label="add bookmark this movie"
+                    >
+                      <img src={NavBookmarkIcon} alt="" />
+                    </button>
+                  )}
                 </div>
               </div>
               <p className="movie-tagline">{movieData.tagline}</p>
@@ -134,7 +155,7 @@ const MoviePage = () => {
           {castData?.cast.map((person: any, index: number) => {
             if (index < 8)
               return (
-                <div className="cast-member-card">
+                <div className="cast-member-card" key={person.id}>
                   <img
                     src={`${apiCastProfileImgUrl}${person.profile_path}`}
                     alt=""

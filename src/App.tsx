@@ -1,15 +1,14 @@
-import React, { createContext, useEffect, useState } from "react";
-import "./App.scss";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
 import axios from "axios";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import React, { createContext, useEffect, useState } from "react";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import "./App.scss";
 import Header from "./components/Header/Header";
+import Bookmarks from "./pages/Bookmarks/Bookmarks";
 import Main from "./pages/Main/Main";
 import MoviePage from "./pages/MoviePage/MoviePage";
-import TvShows from "./pages/TvShows/TvShows";
 import Movies from "./pages/Movies/Movies";
-import Bookmarks from "./pages/Bookmarks/Bookmarks";
-
-import { ThemeProvider, createTheme } from "@mui/material/styles";
+import TvShows from "./pages/TvShows/TvShows";
 
 const darkTheme = createTheme({
   palette: {
@@ -22,7 +21,9 @@ export const AppContext = createContext({});
 function App() {
   const [dataPopularMovies, setDataPopularMovies] = useState<any[]>([]);
   const [dataTrendingTv, setDataTrendingTv] = useState<any[]>([]);
+  const [bookmarkedItems, setBookmarkedItems] = useState<any[]>([]);
 
+  // Fetch data on page load, popular movies, trending tv
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -43,8 +44,38 @@ function App() {
     fetchData();
   }, []);
 
+  // Add item to bookmarks
+  const addToBookmarks = (obj: any) => {
+    // Check for matching item in bookmarks
+    const findItem = bookmarkedItems.find(
+      (bookmark) => Number(obj.id) === Number(bookmark.id)
+    );
+    if (findItem) {
+      // If item already in bookmarks remove it
+      setBookmarkedItems(bookmarkedItems.filter((item) => item.id !== obj.id));
+    } else {
+      // Add item
+      setBookmarkedItems([...bookmarkedItems, obj]);
+    }
+  };
+
+  // Check if item already in bookmarks true/false
+  const checkInBookmarksStatus = (obj: any) => {
+    return bookmarkedItems.some(
+      (item: any) => Number(item.id) === Number(obj.id)
+    );
+  };
+
   return (
-    <AppContext.Provider value={{ dataPopularMovies, dataTrendingTv }}>
+    <AppContext.Provider
+      value={{
+        dataPopularMovies,
+        dataTrendingTv,
+        bookmarkedItems,
+        addToBookmarks,
+        checkInBookmarksStatus,
+      }}
+    >
       <ThemeProvider theme={darkTheme}>
         <div className="App">
           <BrowserRouter>
