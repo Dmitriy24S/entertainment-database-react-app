@@ -66,12 +66,30 @@ function App() {
     );
   };
 
+  // Update local storage bookmarks, add bookmark to localstorage
+  useEffect(() => {
+    if (bookmarkedItems.length > 0) {
+      // prevents clearing localtorage on load
+      localStorage.setItem("bookmarks", JSON.stringify(bookmarkedItems));
+    }
+  }, [bookmarkedItems]);
+
+  // Get local storage bookmarks
+  useEffect(() => {
+    const items = localStorage.getItem("bookmarks");
+    if (items) {
+      // if not null then get local storage bookmarks
+      setBookmarkedItems(JSON.parse(items));
+    }
+  }, []);
+
   return (
     <AppContext.Provider
       value={{
         dataPopularMovies,
         dataTrendingTv,
         bookmarkedItems,
+        setBookmarkedItems,
         addToBookmarks,
         checkInBookmarksStatus,
       }}
