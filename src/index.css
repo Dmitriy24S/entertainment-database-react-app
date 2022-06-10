@@ -17,8 +17,8 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  /* background-color: #282c34; */
   background-color: #10141e;
+  overflow-y: scroll; /*  prevent content jump/shift while fetching now playing movie list, keep scrollbar for consistent width */
 }
 
 button {
