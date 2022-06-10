@@ -4,6 +4,7 @@ import axios from "axios";
 import React, { useContext, useEffect, useState } from "react";
 import { buildStyles, CircularProgressbar } from "react-circular-progressbar";
 import { AppContext } from "../../App";
+import Spinner from "../../components/Spinner/Spinner";
 import NavBookmarkIcon from "../../images/icon-nav-bookmark.svg";
 import "./Movies.scss";
 
@@ -114,7 +115,8 @@ const Movies = () => {
             </Stack>
           </>
         ) : (
-          <h2>Loading</h2>
+          // <h2>Loading</h2>
+          <Spinner />
         )}
       </div>
     </section>
