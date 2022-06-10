@@ -30,6 +30,7 @@
   @media (min-width: 850px) {
     position: fixed;
     height: 100%;
+    width: 5rem; // set width to match parent and incase when there is scroll bar sticks it to right side of parent container
   }
 }
 .header-content {
