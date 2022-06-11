@@ -6,18 +6,29 @@ import { IoMdArrowBack } from "react-icons/io";
 import { Link, useLocation } from "react-router-dom";
 import { AppContext } from "../../App";
 import NavBookmarkIcon from "../../images/icon-nav-bookmark.svg";
+import {
+  ActorInfoDataType,
+  AppContextType,
+  CastDataType,
+  MovieDetailsDataType,
+  MovieDetailsGenresType,
+} from "../../types";
 import "./MoviePage.scss";
 
 const MoviePage = () => {
-  const { addToBookmarks, checkInBookmarksStatus } =
-    useContext<any>(AppContext);
-  const [movieData, setMovieData] = useState<any>();
-  const [castData, setCastData] = useState<any>();
+  const { addToBookmarks, checkInBookmarksStatus } = useContext(
+    AppContext
+  ) as AppContextType;
+  const [movieData, setMovieData] = useState<MovieDetailsDataType>();
+  const [castData, setCastData] = useState<CastDataType>();
 
   // const { id } = useParams();
   // 338953-fantastic-beasts-the-secrets-of-dumbledore
   const { state } = useLocation(); // 338953 - movie id
-  const userScore = movieData?.vote_average * 10;
+  let userScore = 0;
+  if (movieData) {
+    userScore = movieData?.vote_average * 10;
+  }
   const apiUrl = "https://api.themoviedb.org/3";
   const apiKey = "b0574de2203f781e1f1bc82abcf3cd8d";
   const apiCastProfileImgUrl =
@@ -48,16 +59,17 @@ const MoviePage = () => {
     let hours = minutesRuntime / 60;
     let leftover = hours - Math.floor(hours);
     let minutes = Math.round(leftover * 60);
-    return `${Math.floor(hours)}h ${minutes}m`;
-    // 1h 45m
+    return `${Math.floor(hours)}h ${minutes}m`; // 1h 45m
   };
 
-  let movieYear = movieData?.release_date.split("-");
-  // ['2022', '03', '30']
-  let releaseDate2;
+  let movieYear;
+  if (movieData) {
+    movieYear = movieData?.release_date.split("-")[0]; // ['2022', '03', '30']
+  }
+  let releaseDate;
   if (movieYear) {
-    releaseDate2 = `${movieYear[1]}/${movieYear[2]}/${movieYear[0]}`;
-  } // 2022/03/30
+    releaseDate = `${movieYear[1]}/${movieYear[2]}/${movieYear[0]}`; // 2022/03/30
+  }
 
   return movieData ? (
     <>
@@ -77,16 +89,20 @@ const MoviePage = () => {
             <div className="movie-info">
               <h1 className="movie-title">
                 {movieData?.original_title}
-                <span className="movie-year"> ({movieYear[0]})</span>
+                <span className="movie-year">
+                  {" "}
+                  ({movieYear && movieYear[0]})
+                </span>
               </h1>
               <ul className="short-list">
-                <li>{releaseDate2}</li>
+                <li>{releaseDate}</li>
                 <li>
                   <span className="genres">
-                    {movieData.genres.map((genre: any, index: number) =>
-                      index !== movieData.genres.length - 1
-                        ? genre.name + ", "
-                        : genre.name
+                    {movieData.genres.map(
+                      (genre: MovieDetailsGenresType, index: number) =>
+                        index !== movieData.genres.length - 1
+                          ? genre.name + ", "
+                          : genre.name
                     )}
                   </span>
                 </li>
@@ -152,7 +168,7 @@ const MoviePage = () => {
       <section className="movie-cast-info">
         <h3 className="cast-title">Movie Cast</h3>
         <div className="cast-container">
-          {castData?.cast.map((person: any, index: number) => {
+          {castData?.cast.map((person: ActorInfoDataType, index: number) => {
             if (index < 8)
               return (
                 <div className="cast-member-card" key={person.id}>

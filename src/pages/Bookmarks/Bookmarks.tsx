@@ -2,16 +2,19 @@ import React, { useContext } from "react";
 import { buildStyles, CircularProgressbar } from "react-circular-progressbar";
 import { AppContext } from "../../App";
 import NavBookmarkIcon from "../../images/icon-nav-bookmark.svg";
+import { AppContextType, MediaDataType } from "../../types";
 import "./Bookmarks.scss";
 
 const Bookmarks = () => {
-  const { bookmarkedItems, addToBookmarks } = useContext<any>(AppContext);
+  const { bookmarkedItems, addToBookmarks } = useContext(
+    AppContext
+  ) as AppContextType;
 
   return (
     <section className="list bookmark-list">
       <h1 className="list-name">Bookmarks</h1>
       <div className="movie-list-container">
-        {bookmarkedItems.map((item: any, index: number) => {
+        {bookmarkedItems.map((item: MediaDataType, index: number) => {
           const userScore = item?.vote_average * 10;
           return (
             <article className="movie-card bookmark-movie-card" key={item.id}>

@@ -9,6 +9,7 @@ import Main from "./pages/Main/Main";
 import MoviePage from "./pages/MoviePage/MoviePage";
 import Movies from "./pages/Movies/Movies";
 import TvShows from "./pages/TvShows/TvShows";
+import { MediaDataType } from "./types";
 
 const darkTheme = createTheme({
   palette: {
@@ -19,9 +20,11 @@ const darkTheme = createTheme({
 export const AppContext = createContext({});
 
 function App() {
-  const [dataPopularMovies, setDataPopularMovies] = useState<any[]>([]);
-  const [dataTrendingTv, setDataTrendingTv] = useState<any[]>([]);
-  const [bookmarkedItems, setBookmarkedItems] = useState<any[]>([]);
+  const [dataPopularMovies, setDataPopularMovies] = useState<MediaDataType[]>(
+    []
+  );
+  const [dataTrendingTv, setDataTrendingTv] = useState<MediaDataType[]>([]);
+  const [bookmarkedItems, setBookmarkedItems] = useState<MediaDataType[]>([]);
 
   // Fetch data on page load, popular movies, trending tv
   useEffect(() => {
@@ -45,7 +48,7 @@ function App() {
   }, []);
 
   // Add item to bookmarks
-  const addToBookmarks = (obj: any) => {
+  const addToBookmarks = (obj: MediaDataType) => {
     // Check for matching item in bookmarks
     const findItem = bookmarkedItems.find(
       (bookmark) => Number(obj.id) === Number(bookmark.id)
@@ -60,9 +63,9 @@ function App() {
   };
 
   // Check if item already in bookmarks true/false
-  const checkInBookmarksStatus = (obj: any) => {
+  const checkInBookmarksStatus = (obj: MediaDataType) => {
     return bookmarkedItems.some(
-      (item: any) => Number(item.id) === Number(obj.id)
+      (item: MediaDataType) => Number(item.id) === Number(obj.id)
     );
   };
 

@@ -1,9 +1,12 @@
 import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import { AppContext } from "../../App";
+import { AppContextType, MediaDataType } from "../../types";
 
 const Main = () => {
-  const { dataPopularMovies, dataTrendingTv } = useContext<any>(AppContext);
+  const { dataPopularMovies, dataTrendingTv } = useContext(
+    AppContext
+  ) as AppContextType;
 
   return (
     <>
@@ -11,7 +14,7 @@ const Main = () => {
       <section className="list">
         <h1 className="list-name">Popular movies</h1>
         <div className="list-items">
-          {dataPopularMovies.map((movie: any, index: number) => {
+          {dataPopularMovies.map((movie: MediaDataType, index: number) => {
             // Put "-"" instead space in movie title for url:
             const urlName = movie.title
               .trim()
@@ -27,7 +30,7 @@ const Main = () => {
                 >
                   <img
                     src={`https://www.themoviedb.org/t/p/w440_and_h660_face${movie.poster_path}`}
-                    alt={`${movie.original_name} poster`}
+                    alt={`${movie.original_title} poster`}
                     className="movie-poster"
                   />
                   <h4 className="movie-card-title">{movie.title}</h4>
@@ -42,18 +45,18 @@ const Main = () => {
       <section className="list">
         <h1 className="list-name">Trending shows</h1>
         <div className="list-items">
-          {dataTrendingTv?.map((movie: any, index: number) => {
+          {dataTrendingTv?.map((movie: MediaDataType, index: number) => {
             return (
               <article key={movie.id} className="movie-card">
                 <img
                   src={`https://www.themoviedb.org/t/p/w440_and_h660_face${movie.poster_path}`}
-                  alt={`${movie.original_name} poster`}
+                  alt={`${movie?.original_name} poster`}
                   className="movie-poster"
                 />
                 <Link
                   to={`/entertainment-database-react-app/movie/${movie.id}`}
                 >
-                  <h4 className="movie-card-title">{movie.original_name}</h4>
+                  <h4 className="movie-card-title">{movie?.original_name}</h4>
                 </Link>
               </article>
             );
