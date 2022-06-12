@@ -21,7 +21,6 @@ const MediaCard = ({
     AppContext
   ) as AppContextType;
   return (
-    // <article key={mediaItem.id} className="movie-card">
     <article className="movie-card">
       {/* Bookmark button */}
       {checkInBookmarksStatus(mediaItem) ? (

@@ -113,6 +113,7 @@
     gap: 1.3rem;
     overflow-x: scroll;
     scroll-snap-type: x mandatory; // scroll snap part 1
+    overscroll-behavior-inline: contain; // prevent browser forwards/backwards swipe action when swiping inside list
     .cast-member-card {
       scroll-snap-align: start; // scroll snap part 2
       margin-bottom: 1rem;
