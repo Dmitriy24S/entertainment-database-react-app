@@ -6,7 +6,7 @@ import "./App.scss";
 import Header from "./components/Header/Header";
 import Bookmarks from "./pages/Bookmarks/Bookmarks";
 import Main from "./pages/Main/Main";
-import MoviePage from "./pages/MoviePage/MoviePage";
+import MediaDetailsPage from "./pages/MediaDetailsPage/MediaDetailsPage";
 import Movies from "./pages/Movies/Movies";
 import TvShows from "./pages/TvShows/TvShows";
 import { MediaDataType } from "./types";
@@ -109,7 +109,11 @@ function App() {
                 />
                 <Route
                   path="/entertainment-database-react-app/movie/:id"
-                  element={<MoviePage />}
+                  element={<MediaDetailsPage />}
+                />
+                <Route
+                  path="/entertainment-database-react-app/tv/:id"
+                  element={<MediaDetailsPage />}
                 />
                 <Route
                   path="/entertainment-database-react-app/movies"

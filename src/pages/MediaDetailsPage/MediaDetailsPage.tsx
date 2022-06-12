@@ -10,41 +10,45 @@ import {
   ActorInfoDataType,
   AppContextType,
   CastDataType,
-  MovieDetailsDataType,
+  MediaDetailType,
   MovieDetailsGenresType,
 } from "../../types";
-import "./MoviePage.scss";
+import "./MediaDetailsPage.scss";
 
-const MoviePage = () => {
+const MediaDetailsPage = () => {
   const { addToBookmarks, checkInBookmarksStatus } = useContext(
     AppContext
   ) as AppContextType;
-  const [movieData, setMovieData] = useState<MovieDetailsDataType>();
+  const [mediaData, setMediaData] = useState<MediaDetailType>();
   const [castData, setCastData] = useState<CastDataType>();
 
   // const { id } = useParams();
   // 338953-fantastic-beasts-the-secrets-of-dumbledore
-  const { state } = useLocation(); // 338953 - movie id
+
+  const { state }: any = useLocation(); // 338953 - media id // array: (2) [92782, 'tv'] 0: 92782 1: "tv"
+  const [mediaId, mediaType] = state;
+
   let userScore = 0;
-  if (movieData) {
-    userScore = movieData?.vote_average * 10;
+  if (mediaData) {
+    userScore = mediaData?.vote_average * 10;
   }
   const apiUrl = "https://api.themoviedb.org/3";
   const apiKey = "b0574de2203f781e1f1bc82abcf3cd8d";
   const apiCastProfileImgUrl =
     "https://www.themoviedb.org/t/p/w276_and_h350_face";
 
-  // Fetch movie/cast data on page load
+  // Fetch media/cast data on page load
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const apiMovieData = await axios.get(
-          `https://api.themoviedb.org/3/movie/${state}?api_key=b0574de2203f781e1f1bc82abcf3cd8d&language=en-US
-                `
+        const apiMediaData = await axios.get(
+          `${apiUrl}/${mediaType}/${mediaId}?api_key=${apiKey}&language=en-US`
         );
-        setMovieData(apiMovieData.data);
+        setMediaData(apiMediaData.data);
         const apiCreditsData = await axios.get(
-          `${apiUrl}/movie/${state}/credits?api_key=${apiKey}`
+          `${apiUrl}/${mediaType}/${mediaId}/${
+            mediaType === "movie" ? "credits" : "aggregate_credits"
+          }?api_key=${apiKey}`
         );
         setCastData(apiCreditsData.data);
       } catch (error) {
@@ -52,6 +56,7 @@ const MoviePage = () => {
         console.log(error);
       }
     };
+
     fetchData();
   }, []);
 
@@ -63,50 +68,60 @@ const MoviePage = () => {
   };
 
   let movieYear;
-  if (movieData) {
-    movieYear = movieData?.release_date.split("-")[0]; // ['2022', '03', '30']
+  if (mediaData) {
+    if (mediaType === "movie") {
+      movieYear = mediaData?.release_date.split("-"); // ['2022', '03', '30']
+    }
+    if (mediaType === "tv") {
+      movieYear = mediaData?.first_air_date.split("-"); // ['2022', '06', '08']
+    }
   }
   let releaseDate;
   if (movieYear) {
     releaseDate = `${movieYear[1]}/${movieYear[2]}/${movieYear[0]}`; // 2022/03/30
   }
 
-  return movieData ? (
+  return mediaData ? (
     <>
       <Link to="/entertainment-database-react-app" className="return-btn">
         <IoMdArrowBack />
       </Link>
       <section className="movie-container">
-        {movieData && (
+        {mediaData && (
           <>
             {/* Movie poster */}
             <img
-              src={`https://www.themoviedb.org/t/p/w440_and_h660_face${movieData?.poster_path}`}
-              alt={`${movieData?.original_title} poster`}
+              src={`https://www.themoviedb.org/t/p/w440_and_h660_face${mediaData?.poster_path}`}
+              alt={`${mediaData?.original_title} poster`}
               className="movie-poster-full"
             />
             {/* Movie info */}
             <div className="movie-info">
               <h1 className="movie-title">
-                {movieData?.original_title}
+                {mediaType === "movie"
+                  ? mediaData?.original_title
+                  : mediaData.original_name}
                 <span className="movie-year">
-                  {" "}
-                  ({movieYear && movieYear[0]})
+                  {` (${movieYear && movieYear[0]})`}
                 </span>
               </h1>
               <ul className="short-list">
                 <li>{releaseDate}</li>
                 <li>
                   <span className="genres">
-                    {movieData.genres.map(
+                    {mediaData.genres.map(
                       (genre: MovieDetailsGenresType, index: number) =>
-                        index !== movieData.genres.length - 1
+                        index !== mediaData.genres.length - 1
                           ? genre.name + ", "
                           : genre.name
                     )}
                   </span>
                 </li>
-                <li className="runtime">{calcRuntime(movieData.runtime)}</li>
+                <li className="runtime">
+                  {mediaType === "movie"
+                    ? calcRuntime(mediaData.runtime)
+                    : `${mediaData.episode_run_time[0]}min`}
+                </li>
               </ul>
               <div className="movie-interaction-menu">
                 <div className="movie-user-rating">
@@ -138,9 +153,9 @@ const MoviePage = () => {
                     User <br /> Score
                   </h5>
                   {/* Bookmark button */}
-                  {checkInBookmarksStatus(movieData) ? (
+                  {checkInBookmarksStatus(mediaData) ? (
                     <button
-                      onClick={() => addToBookmarks(movieData)}
+                      onClick={() => addToBookmarks(mediaData)}
                       className="bookmark-btn unbookmark"
                       aria-label="remove from bookmarks this movie"
                     >
@@ -148,7 +163,7 @@ const MoviePage = () => {
                     </button>
                   ) : (
                     <button
-                      onClick={() => addToBookmarks(movieData)}
+                      onClick={() => addToBookmarks(mediaData)}
                       className="bookmark-btn"
                       aria-label="add bookmark this movie"
                     >
@@ -157,16 +172,16 @@ const MoviePage = () => {
                   )}
                 </div>
               </div>
-              <p className="movie-tagline">{movieData.tagline}</p>
+              <p className="movie-tagline">{mediaData.tagline}</p>
               <h5 className="overview-title">Overview</h5>
-              <p className="movie-description">{movieData.overview}</p>
+              <p className="movie-description">{mediaData.overview}</p>
             </div>
           </>
         )}
       </section>
-      {/* Movie cast */}
+      {/* Media cast */}
       <section className="movie-cast-info">
-        <h3 className="cast-title">Movie Cast</h3>
+        <h3 className="cast-title">The Cast</h3>
         <div className="cast-container">
           {castData?.cast.map((person: ActorInfoDataType, index: number) => {
             if (index < 8)
@@ -178,7 +193,15 @@ const MoviePage = () => {
                   />
                   <div className="names-container">
                     <h4 className="actor-name">{person.name}</h4>
-                    <p className="character-name">{person.character}</p>
+                    <p className="character-name">
+                      {mediaType === "movie"
+                        ? person.character
+                        : person?.roles?.map((role, index) =>
+                            index !== person.roles.length - 1
+                              ? role.character + ", "
+                              : role.character
+                          )}
+                    </p>
                   </div>
                 </div>
               );
@@ -191,4 +214,4 @@ const MoviePage = () => {
   );
 };
 
-export default MoviePage;
+export default MediaDetailsPage;

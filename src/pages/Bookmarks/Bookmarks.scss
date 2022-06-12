@@ -1,12 +1,15 @@
-.bookmark-movie-card,
-.movie-list-container {
+.movie-card {
   position: relative;
   .bookmark-btn {
     background-color: rgb(19, 14, 43);
     position: absolute;
     top: 0.5rem;
-    right: 1rem;
+    right: 0.5rem;
   }
+}
+
+.bookmark-icon {
+  width: 12px;
 }
 
 .bookmark-btn {

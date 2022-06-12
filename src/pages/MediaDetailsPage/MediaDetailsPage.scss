@@ -118,11 +118,15 @@
       margin-bottom: 1rem;
       min-width: 8rem;
       min-height: 294px; // no image placement spacing for card?
+      max-width: 128px; // limit img size if only 1 cast in list // ? refactor css ?
       display: flex;
       flex-direction: column;
       overflow: hidden;
       background-color: rgb(25 33 52);
       border-radius: 10px;
+      img {
+        min-height: 162px; // if no image placeholder content card spacing fix
+      }
       .names-container {
         padding: 0.7rem;
       }
