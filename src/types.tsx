@@ -22,6 +22,7 @@ export interface MediaDataType {
   overview: string; // "From DC Comics comes the Suicide Squad, an antihero team of incarcerated supervillains who act as deniable assets for the United States government, undertaking high-risk black ops missions in exchange for commuted prison sentences."
   poster_path: string; // "/e1mjopzAS2KNsvpbpahQ1a6SkSn.jpg"
   release_date: string; // "2016-08-03"
+  first_air_date: string;
   title: string; // "Suicide Squad"
   video: boolean; // false,
   vote_average: number; // 5.91

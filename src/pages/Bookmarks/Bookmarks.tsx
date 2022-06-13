@@ -54,8 +54,16 @@ const Bookmarks = () => {
                     })}
                   />
                 </div>
-                <h4 className="movie-title">{item.original_title}</h4>
-                <p className="movie-release-date">{item.release_date}</p>
+                <h4 className="movie-title">
+                  {/* api name difference for movie / tv show data */}
+                  {item.original_title
+                    ? item.original_title
+                    : item.original_name}
+                </h4>
+                <p className="movie-release-date">
+                  {item.release_date ? item.release_date : item.first_air_date}
+                  {/* api name difference for movie / tv show data */}
+                </p>
               </div>
             </article>
           );
