@@ -1,4 +1,5 @@
-import React, { useContext } from "react";
+import Tooltip from "@mui/material/Tooltip";
+import { useContext } from "react";
 import { Link } from "react-router-dom";
 import { AppContext } from "../../App";
 import NavBookmarkIcon from "../../images/icon-nav-bookmark.svg";
@@ -24,21 +25,25 @@ const MediaCard = ({
     <article className="movie-card">
       {/* Bookmark button */}
       {checkInBookmarksStatus(mediaItem) ? (
-        <button
-          onClick={() => addToBookmarks(mediaItem)}
-          className="bookmark-btn unbookmark"
-          aria-label="remove from bookmarks this movie"
-        >
-          <img src={NavBookmarkIcon} alt="" className="bookmark-icon" />
-        </button>
+        <Tooltip title="Remove bookmark">
+          <button
+            onClick={() => addToBookmarks(mediaItem)}
+            className="bookmark-btn unbookmark"
+            aria-label="remove from bookmarks this movie"
+          >
+            <img src={NavBookmarkIcon} alt="" className="bookmark-icon" />
+          </button>
+        </Tooltip>
       ) : (
-        <button
-          onClick={() => addToBookmarks(mediaItem)}
-          className="bookmark-btn"
-          aria-label="add bookmark this movie"
-        >
-          <img src={NavBookmarkIcon} alt="" className="bookmark-icon" />
-        </button>
+        <Tooltip title="Add bookmark">
+          <button
+            onClick={() => addToBookmarks(mediaItem)}
+            className="bookmark-btn"
+            aria-label="add bookmark this movie"
+          >
+            <img src={NavBookmarkIcon} alt="" className="bookmark-icon" />
+          </button>
+        </Tooltip>
       )}
       <img
         src={`https://www.themoviedb.org/t/p/w440_and_h660_face${mediaItem.poster_path}`}

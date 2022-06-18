@@ -1,11 +1,12 @@
-import React from "react";
-import Logo from "../../images/logo.svg";
-import NavHomeIcon from "../../images/icon-nav-home.svg";
+import Tooltip from "@mui/material/Tooltip";
+import { Link } from "react-router-dom";
 import NavBookmarkIcon from "../../images/icon-nav-bookmark.svg";
+import NavHomeIcon from "../../images/icon-nav-home.svg";
 import NavMoviesIcon from "../../images/icon-nav-movies.svg";
 import NavTvIcon from "../../images/icon-nav-tv-series.svg";
 import ProfileIcon from "../../images/image-avatar.png";
-import { Link } from "react-router-dom";
+import Logo from "../../images/logo.svg";
+
 import "./Header.scss";
 
 const Header = () => {
@@ -19,24 +20,32 @@ const Header = () => {
             </Link>
             <ul className="nav-menu">
               <li>
-                <Link to={"/entertainment-database-react-app"}>
-                  <img src={NavHomeIcon} alt="" />
-                </Link>
+                <Tooltip title="Home">
+                  <Link to={"/entertainment-database-react-app"}>
+                    <img src={NavHomeIcon} alt="" />
+                  </Link>
+                </Tooltip>
               </li>
               <li>
-                <Link to={"/entertainment-database-react-app/movies"}>
-                  <img src={NavMoviesIcon} alt="" />
-                </Link>
+                <Tooltip title="Movies">
+                  <Link to={"/entertainment-database-react-app/movies"}>
+                    <img src={NavMoviesIcon} alt="" />
+                  </Link>
+                </Tooltip>
               </li>
               <li>
-                <Link to={"/entertainment-database-react-app/tv"}>
-                  <img src={NavTvIcon} alt="" />
-                </Link>
+                <Tooltip title="Tv Shows">
+                  <Link to={"/entertainment-database-react-app/tv"}>
+                    <img src={NavTvIcon} alt="" />
+                  </Link>
+                </Tooltip>
               </li>
               <li>
-                <Link to={"/entertainment-database-react-app/bookmarks"}>
-                  <img src={NavBookmarkIcon} alt="" />
-                </Link>
+                <Tooltip title="Bookmarks">
+                  <Link to={"/entertainment-database-react-app/bookmarks"}>
+                    <img src={NavBookmarkIcon} alt="" />
+                  </Link>
+                </Tooltip>
               </li>
             </ul>
             <img src={ProfileIcon} alt="" className="user-profile-icon" />

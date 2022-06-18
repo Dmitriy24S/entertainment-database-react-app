@@ -1,3 +1,4 @@
+import { Tooltip } from "@mui/material";
 import Pagination from "@mui/material/Pagination";
 import Stack from "@mui/material/Stack";
 import axios from "axios";
@@ -56,21 +57,25 @@ const TvShows = () => {
                   <article className="movie-card" key={item.id}>
                     {/* Bookmark button */}
                     {checkInBookmarksStatus(item) ? (
-                      <button
-                        onClick={() => addToBookmarks(item)}
-                        className="bookmark-btn unbookmark"
-                        aria-label="remove from bookmarks this movie"
-                      >
-                        <img src={NavBookmarkIcon} alt="" />
-                      </button>
+                      <Tooltip title="Remove bookmark">
+                        <button
+                          onClick={() => addToBookmarks(item)}
+                          className="bookmark-btn unbookmark"
+                          aria-label="remove from bookmarks this movie"
+                        >
+                          <img src={NavBookmarkIcon} alt="" />
+                        </button>
+                      </Tooltip>
                     ) : (
-                      <button
-                        onClick={() => addToBookmarks(item)}
-                        className="bookmark-btn"
-                        aria-label="add bookmark this movie"
-                      >
-                        <img src={NavBookmarkIcon} alt="" />
-                      </button>
+                      <Tooltip title="Bookmark">
+                        <button
+                          onClick={() => addToBookmarks(item)}
+                          className="bookmark-btn"
+                          aria-label="add bookmark this movie"
+                        >
+                          <img src={NavBookmarkIcon} alt="" />
+                        </button>
+                      </Tooltip>
                     )}
                     <img
                       src={`https://www.themoviedb.org/t/p/w440_and_h660_face${item?.poster_path}`}

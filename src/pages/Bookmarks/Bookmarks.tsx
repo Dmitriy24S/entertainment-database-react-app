@@ -1,4 +1,5 @@
-import React, { useContext } from "react";
+import { Tooltip } from "@mui/material";
+import { useContext } from "react";
 import { buildStyles, CircularProgressbar } from "react-circular-progressbar";
 import { AppContext } from "../../App";
 import NavBookmarkIcon from "../../images/icon-nav-bookmark.svg";
@@ -18,13 +19,15 @@ const Bookmarks = () => {
           const userScore = item?.vote_average * 10;
           return (
             <article className="movie-card bookmark-movie-card" key={item.id}>
-              <button
-                onClick={() => addToBookmarks(item)}
-                className="bookmark-btn unbookmark"
-                aria-label="remove from bookmarks this movie"
-              >
-                <img src={NavBookmarkIcon} alt="" />
-              </button>
+              <Tooltip title="Remove bookmark">
+                <button
+                  onClick={() => addToBookmarks(item)}
+                  className="bookmark-btn unbookmark"
+                  aria-label="remove from bookmarks this movie"
+                >
+                  <img src={NavBookmarkIcon} alt="" />
+                </button>
+              </Tooltip>
               <img
                 src={`https://www.themoviedb.org/t/p/w440_and_h660_face${item?.poster_path}`}
                 alt=""
