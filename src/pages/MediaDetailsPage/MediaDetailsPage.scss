@@ -126,7 +126,8 @@
       background-color: rgb(25 33 52);
       border-radius: 10px;
       img {
-        min-height: 162px; // if no image placeholder content card spacing fix
+        // min-height: 162px; // if no image placeholder - content card spacing fix
+        height: 162px; // safari img is stretched with min-height - set hard code height to fix?
       }
       .names-container {
         padding: 0.7rem;
