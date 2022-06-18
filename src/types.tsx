@@ -124,6 +124,8 @@ export interface AppContextType {
   checkInBookmarksStatus: (
     obj: MediaDataType | MovieDetailsDataType // ? future refactor
   ) => boolean;
+  activeMenu: string;
+  setActiveMenu: React.Dispatch<React.SetStateAction<string>>;
 }
 
 // export interface TvShowDetailsType extends MovieDetailsDataType {

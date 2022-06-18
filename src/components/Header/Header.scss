@@ -75,10 +75,16 @@
     display: flex;
     padding: 0.3rem 0.5rem;
   }
+  .active-menu {
+    filter: hue-rotate(119deg) contrast(2) brightness(1.5); // keep active menu color
+  }
   @media (hover) {
     // prevent after tap keeping filter color
     a:hover img {
       filter: hue-rotate(119deg) contrast(2) brightness(1.5);
+    }
+    .active-menu:hover {
+      filter: none; // prevent stack filter changes color
     }
   }
 }

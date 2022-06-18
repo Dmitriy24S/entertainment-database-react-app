@@ -1,6 +1,6 @@
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import axios from "axios";
-import React, { createContext, useEffect, useState } from "react";
+import { createContext, useEffect, useState } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import "./App.scss";
 import Header from "./components/Header/Header";
@@ -25,6 +25,7 @@ function App() {
   );
   const [dataTrendingTv, setDataTrendingTv] = useState<MediaDataType[]>([]);
   const [bookmarkedItems, setBookmarkedItems] = useState<MediaDataType[]>([]);
+  const [activeMenu, setActiveMenu] = useState("");
 
   // Fetch data on page load, popular movies, trending tv
   useEffect(() => {
@@ -95,6 +96,8 @@ function App() {
         setBookmarkedItems,
         addToBookmarks,
         checkInBookmarksStatus,
+        activeMenu,
+        setActiveMenu,
       }}
     >
       <ThemeProvider theme={darkTheme}>
