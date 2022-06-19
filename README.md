@@ -1,4 +1,13 @@
-# Getting Started with Create React App
+# Entertainment movie & tv show database
+
+![Design preview for Entertainment movie & tv show database](./design/preview.png)
+
+## Welcome 
+
+Entertainment movie & tv show database. Created with React, CSS & Movie DB Api.
+[Live Demo](https://dmitriy24s.github.io/entertainment-database-react-app/) 👈
+
+## Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
