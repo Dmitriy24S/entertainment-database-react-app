@@ -103,28 +103,16 @@ function App() {
             <Header />
             <main className='App-main'>
               <Routes>
-                <Route path='/entertainment-database-react-app' element={<Main />} />
+                <Route path='' element={<Main />} />
+                <Route path='/movie/:id' element={<MediaDetailsPage />} />
+                <Route path='/tv/:id' element={<MediaDetailsPage />} />
                 <Route
-                  path='/entertainment-database-react-app/movie/:id'
-                  element={<MediaDetailsPage />}
-                />
-                <Route
-                  path='/entertainment-database-react-app/tv/:id'
-                  element={<MediaDetailsPage />}
-                />
-                <Route
-                  path='/entertainment-database-react-app/movies'
+                  path='/movies'
                   // element={<MediaList media='movie' />}
                   element={<MediaList media={MediaEnum.MOVIE} />}
                 />
-                <Route
-                  path='/entertainment-database-react-app/tv'
-                  element={<MediaList media={MediaEnum.TV} />}
-                />
-                <Route
-                  path='/entertainment-database-react-app/bookmarks'
-                  element={<Bookmarks />}
-                />
+                <Route path='/tv' element={<MediaList media={MediaEnum.TV} />} />
+                <Route path='/bookmarks' element={<Bookmarks />} />
               </Routes>
             </main>
           </BrowserRouter>

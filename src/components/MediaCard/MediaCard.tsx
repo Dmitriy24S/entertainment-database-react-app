@@ -47,7 +47,7 @@ const MediaCard = ({ mediaItem, urlName, title, mediaType }: MediaCardProps) => 
         className='media-poster'
       />
       <Link
-        to={`/entertainment-database-react-app/${mediaType}/${mediaItem.id}-${urlName}`}
+        to={`/${mediaType}/${mediaItem.id}-${urlName}`}
         state={[mediaItem.id, mediaType]}
       >
         <h4 className='media-card-title'>{title}</h4>
