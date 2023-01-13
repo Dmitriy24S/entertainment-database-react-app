@@ -25,6 +25,7 @@
   @media (min-width: 850px) {
     padding-top: 2rem;
   }
+
   .list {
     display: flex;
     flex-direction: column;
@@ -32,12 +33,14 @@
     width: 100%;
     margin: 0 auto;
     margin-bottom: 2rem;
+
     .list-name {
       text-align: left;
       text-transform: capitalize;
       font-size: 1.3rem;
       margin-bottom: 0.5rem;
     }
+
     .list-items {
       gap: 1.2rem;
       margin-top: 1rem;
@@ -55,24 +58,25 @@
         grid-auto-columns: 33%;
       }
     }
-    .movie-poster {
+
+    .media-poster {
       border-radius: 10px;
       scroll-snap-align: start;
       width: 100%;
     }
-    .movie-card {
+
+    .media-card {
       max-width: 245px;
       position: relative;
       margin-bottom: 0.1rem;
-      .movie-card-title {
+      .media-card-title {
         position: absolute;
         font-size: 1rem;
         font-weight: 400;
         text-align: left;
         left: 10px;
         bottom: 10px;
-        text-shadow: 1px 0 20px #000, 0 -1px 0 #000, 0 1px 20px #000,
-          -1px 0 0 #000;
+        text-shadow: 1px 0 20px #000, 0 -1px 0 #000, 0 1px 20px #000, -1px 0 0 #000;
         width: 100%;
         padding: 0.3rem;
         padding-left: 0;

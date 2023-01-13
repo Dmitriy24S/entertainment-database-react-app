@@ -1,9 +1,10 @@
-.movie-list-container {
+.mediaListContainer {
   margin-top: 1rem;
   display: flex;
   flex-wrap: wrap;
   gap: 1.3rem;
-  .movie-card {
+
+  .mediaCard {
     margin-bottom: 1rem;
     display: flex;
     flex-direction: column;
@@ -12,29 +13,45 @@
     border-radius: 10px;
     padding-bottom: 2rem;
     flex: 1 19%;
+    // ! repeat from app scss add try?
+    max-width: 245px;
+    position: relative;
+    margin-bottom: 0.1rem;
+    // ! repeat from bookamkrs scss copy try?
+    position: relative;
     @media (max-width: 920px) {
       flex: 1 25%;
     }
     @media (max-width: 600px) {
       flex: 1 47%;
     }
-    .movie-card-poster {
+
+    .mediaCardPoster {
       object-fit: cover;
       height: 294px; // if no img placement card spacing fix? text positioning
     }
-    .movie-info {
+
+    .mediaInfo {
       position: relative;
       margin-top: 2rem;
       padding: 0.7rem;
       display: flex;
       flex-direction: column;
       gap: 0.5rem;
-      .movie-release-date {
+
+      .mediaTitle {
+        // ! repeat form detailed scss
+        font-size: 1.4rem;
+        font-weight: 500;
+      }
+
+      .mediaReleaseDate {
         margin-top: 0.5rem;
         font-size: 0.9rem;
         color: hsl(250, 14%, 68%);
       }
-      .user-score-container {
+
+      .userScoreContainer {
         position: absolute;
         top: -3.5rem;
         width: 50px;
@@ -42,6 +59,7 @@
     }
   }
 }
+
 .pagination {
   margin: 0 auto;
   justify-content: center;

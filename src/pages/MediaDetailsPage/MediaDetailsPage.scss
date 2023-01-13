@@ -14,7 +14,7 @@
   }
 }
 
-.movie-container {
+.media-container {
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
@@ -24,27 +24,32 @@
     flex-direction: row;
   }
 }
-.movie-poster-full {
+
+.media-poster-full {
   width: 16rem;
   margin: 0 auto;
   @media (min-width: 640px) {
     margin: 0;
   }
 }
-.movie-title {
+
+.media-title {
   font-size: 1.4rem;
   font-weight: 500;
 }
-.movie-info {
+
+.media-info {
   padding: 1.5rem 0 0;
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
   max-width: 31rem;
 }
-.movie-year {
+
+.media-year {
   color: hsl(0, 0%, 80%);
 }
+
 .short-list {
   display: flex;
   gap: 1.5rem;
@@ -53,7 +58,7 @@
 }
 // short list - dot separator
 .short-list li::before {
-  content: "\2022"; /* Add content: \2022 is the CSS Code/unicode for a bullet */
+  content: '\2022'; /* Add content: \2022 is the CSS Code/unicode for a bullet */
   color: white; /* Change the color */
   font-weight: bold; /* If you want it to be bold */
   display: inline-block; /* Needed to add space between the bullet and the text */
@@ -64,10 +69,9 @@
   content: none;
 }
 
-.movie-interaction-menu {
+.media-interaction-menu {
   margin-top: 1rem;
-  // Movie user score
-  .movie-user-rating {
+  .media-user-rating {
     display: flex;
     align-items: center;
     gap: 0.7rem;
@@ -84,7 +88,7 @@
   }
 }
 
-.movie-tagline {
+.media-tagline {
   font-size: 0.9rem;
   margin-top: 1rem;
   font-style: italic;
@@ -96,17 +100,19 @@
   margin-top: 0.5rem;
 }
 
-.movie-description {
+.media-description {
   font-size: 0.9rem;
 }
 
 // Cast
-.movie-cast-info {
+.media-cast-info {
   margin-top: 2rem;
+
   .cast-title {
     font-size: 1.3rem;
     font-size: 500;
   }
+
   .cast-container {
     margin-top: 1rem;
     display: flex;
@@ -114,6 +120,7 @@
     overflow-x: scroll;
     scroll-snap-type: x mandatory; // scroll snap part 1
     overscroll-behavior-inline: contain; // prevent browser forwards/backwards swipe action when swiping inside list
+
     .cast-member-card {
       scroll-snap-align: start; // scroll snap part 2
       margin-bottom: 1rem;
@@ -125,16 +132,20 @@
       overflow: hidden;
       background-color: rgb(25 33 52);
       border-radius: 10px;
+
       img {
         // min-height: 162px; // if no image placeholder - content card spacing fix
         height: 162px; // safari img is stretched with min-height - set hard code height to fix?
       }
+
       .names-container {
         padding: 0.7rem;
       }
+
       .actor-name {
         font-size: 1rem;
       }
+
       .character-name {
         margin-top: 0.5rem;
         font-size: 1rem;

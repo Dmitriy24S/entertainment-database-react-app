@@ -1,11 +1,9 @@
-.movie-card {
-  position: relative;
-  .bookmark-btn {
-    background-color: rgb(19, 14, 43);
-    position: absolute;
-    top: 0.5rem;
-    right: 0.5rem;
-  }
+// TODO: refactor names - bookmark / bookmark-btn--card ?
+.bookmark-btn--card {
+  background-color: rgb(19, 14, 43);
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
 }
 
 .bookmark-icon {
@@ -26,6 +24,7 @@
     }
   }
 }
+
 .unbookmark {
   filter: hue-rotate(125deg) contrast(2.6) brightness(1.1);
   @media (hover) {
