@@ -83,7 +83,7 @@ const MediaDetailsPage = () => {
 
   return mediaData ? (
     <>
-      <Link to='/entertainment-database-react-app' className='return-btn'>
+      <Link to='/' className='return-btn'>
         <IoMdArrowBack />
       </Link>
       <section className='media-container'>
