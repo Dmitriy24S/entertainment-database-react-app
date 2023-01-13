@@ -93,7 +93,11 @@ const MediaDetailsPage = () => {
             {/* Media poster */}
             <img
               src={`https://www.themoviedb.org/t/p/w440_and_h660_face${mediaData?.poster_path}`}
-              alt={`${mediaData?.original_title} poster`}
+              alt={`${
+                mediaType === MediaEnum.MOVIE
+                  ? mediaData?.original_title
+                  : mediaData.original_name
+              } poster`}
               className='media-poster-full'
             />
             {/* Media info */}
@@ -127,8 +131,8 @@ const MediaDetailsPage = () => {
                   {/* Media user score rating circle */}
                   <div className='user-score-container'>
                     <CircularProgressbar
-                      value={userScore}
                       text={`${userScore.toFixed()}%`}
+                      value={userScore}
                       background
                       styles={buildStyles({
                         // Whether to use rounded or flat corners on the ends - can use 'butt' or 'round'
