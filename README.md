@@ -2,10 +2,10 @@
 
 ![Design preview for Entertainment movie & tv show database](./design/preview.png)
 
-## Welcome 
+## Welcome
 
 Entertainment movie & tv show database. Created with React, CSS & Movie DB Api.
-[Live Demo](https://dmitriy24s.github.io/entertainment-database-react-app/) 👈
+[Live Demo](https://entertainment-database-react-app.vercel.app/) 👈
 
 ## Getting Started with Create React App
 
