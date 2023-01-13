@@ -1,3 +1,4 @@
+import { Tooltip } from '@mui/material'
 import axios from 'axios'
 import React, { useContext, useEffect, useState } from 'react'
 import { buildStyles, CircularProgressbar } from 'react-circular-progressbar'
@@ -152,21 +153,25 @@ const MediaDetailsPage = () => {
                   </h5>
                   {/* Bookmark button */}
                   {checkInBookmarksStatus(mediaData) ? (
-                    <button
-                      onClick={() => addToBookmarks(mediaData)}
-                      className='bookmark-btn unbookmark'
-                      aria-label='remove from bookmarks'
-                    >
-                      <img src={NavBookmarkIcon} alt='' />
-                    </button>
+                    <Tooltip title='Remove bookmark'>
+                      <button
+                        onClick={() => addToBookmarks(mediaData)}
+                        className='bookmark-btn unbookmark'
+                        aria-label='remove from bookmarks'
+                      >
+                        <img src={NavBookmarkIcon} alt='' />
+                      </button>
+                    </Tooltip>
                   ) : (
-                    <button
-                      onClick={() => addToBookmarks(mediaData)}
-                      className='bookmark-btn'
-                      aria-label='add to bookmarks'
-                    >
-                      <img src={NavBookmarkIcon} alt='' />
-                    </button>
+                    <Tooltip title='Add bookmark'>
+                      <button
+                        onClick={() => addToBookmarks(mediaData)}
+                        className='bookmark-btn'
+                        aria-label='add to bookmarks'
+                      >
+                        <img src={NavBookmarkIcon} alt='' />
+                      </button>
+                    </Tooltip>
                   )}
                 </div>
               </div>
