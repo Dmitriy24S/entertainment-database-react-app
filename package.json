@@ -1,6 +1,5 @@
 {
   "name": "entertainment-db-react-app",
-  "homepage": "https://dmitriy24s.github.io/entertainment-database-react-app/",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
