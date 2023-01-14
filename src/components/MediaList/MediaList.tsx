@@ -4,12 +4,15 @@ import Stack from '@mui/material/Stack'
 import axios from 'axios'
 import React, { useContext, useEffect, useState } from 'react'
 import { buildStyles, CircularProgressbar } from 'react-circular-progressbar'
+import { Link } from 'react-router-dom'
 import { AppContext } from '../../App'
 import Spinner from '../../components/Spinner/Spinner'
 import NavBookmarkIcon from '../../images/icon-nav-bookmark.svg'
 import { AppContextType, MediaDataType, MediaEnum, MovieListDataType } from '../../types'
 import { getApiKey } from '../../utils/getApiKey'
 import { getMediaApiUrl } from '../../utils/getMediaApiUrl'
+import { getMediaTitle } from '../../utils/getMediaTitle'
+import { getUrlName } from '../../utils/getUrlName'
 import styles from './MediaList.module.scss'
 
 type Props = {
@@ -63,6 +66,8 @@ const MediaList = ({ media }: Props) => {
         {mediaData ? (
           <>
             {mediaData.results.map((item: MediaDataType, index: number) => {
+              const urlName =
+                getMediaTitle(media, item) && getUrlName(getMediaTitle(media, item)) // TODO: refactor?
               const userScore = item?.vote_average * 10
               return (
                 <article className={styles.mediaCard} key={item.id}>
@@ -73,7 +78,7 @@ const MediaList = ({ media }: Props) => {
                         onClick={() => addToBookmarks(item)}
                         // TODO: refactor bookmark / bookmark-btn--card ?
                         className='bookmark-btn bookmark-btn--card unbookmark'
-                        aria-label='remove from bookmarks this media'
+                        aria-label='remove from bookmarks'
                       >
                         <img src={NavBookmarkIcon} alt='' />
                       </button>
@@ -119,10 +124,15 @@ const MediaList = ({ media }: Props) => {
                       />
                     </div>
                     <h4 className={styles.mediaTitle}>
-                      {/* Movies API */}
-                      {media === MediaEnum.MOVIE && item.original_title}
-                      {/* TV Shows API */}
-                      {media === MediaEnum.TV && item.original_name}
+                      <Link
+                        to={`/${media}/${item.id}-${urlName}`}
+                        state={[item.id, media]}
+                      >
+                        {/* Movies API */}
+                        {media === MediaEnum.MOVIE && item.original_title}
+                        {/* TV Shows API */}
+                        {media === MediaEnum.TV && item.original_name}
+                      </Link>
                     </h4>
                     <p className={styles.mediaReleaseDate}>
                       {media === MediaEnum.MOVIE && item.release_date}

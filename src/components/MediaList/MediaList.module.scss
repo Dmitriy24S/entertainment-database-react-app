@@ -43,6 +43,10 @@
         // ! repeat form detailed scss
         font-size: 1.4rem;
         font-weight: 500;
+        &:hover {
+          text-decoration: underline;
+          // ! repeat form app scss
+        }
       }
 
       .mediaReleaseDate {

@@ -33,6 +33,8 @@ export interface MediaDataType {
   vote_average: number // 5.91
   vote_count: number // 1466
   popularity: number // 48.261451
+  // TODO: refactor values missing?
+  media_type?: string
 }
 
 export interface CastDataType {
