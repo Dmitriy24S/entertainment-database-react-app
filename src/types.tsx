@@ -1,9 +1,10 @@
 export enum MediaEnum {
   TV = 'tv',
   MOVIE = 'movie',
+  BOOKMARKS = 'bookmarks',
 }
 
-export interface MovieListDataType {
+export interface MediaListDataType {
   page: number // 1
   results: MediaDataType[]
   dates: {

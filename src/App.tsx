@@ -5,9 +5,9 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import './App.scss'
 import Header from './components/Header/Header'
 import MediaList from './components/MediaList/MediaList'
-import Bookmarks from './pages/Bookmarks/Bookmarks'
 import Main from './pages/Main/Main'
 import MediaDetailsPage from './pages/MediaDetailsPage/MediaDetailsPage'
+import './styles/Bookmark.scss'
 import { MediaDataType, MediaEnum } from './types'
 
 const darkTheme = createTheme({
@@ -109,10 +109,13 @@ function App() {
                 <Route
                   path='/movies'
                   // element={<MediaList media='movie' />}
-                  element={<MediaList media={MediaEnum.MOVIE} />}
+                  element={<MediaList page={MediaEnum.MOVIE} />}
                 />
-                <Route path='/tv' element={<MediaList media={MediaEnum.TV} />} />
-                <Route path='/bookmarks' element={<Bookmarks />} />
+                <Route path='/tv' element={<MediaList page={MediaEnum.TV} />} />
+                <Route
+                  path='/bookmarks'
+                  element={<MediaList page={MediaEnum.BOOKMARKS} />}
+                />
               </Routes>
             </main>
           </BrowserRouter>
