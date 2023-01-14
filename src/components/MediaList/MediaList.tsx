@@ -64,6 +64,8 @@ const MediaList = ({ page }: Props) => {
     setSelectedPage(value)
   }
 
+  const data = page === MediaEnum.BOOKMARKS ? bookmarkedItems : mediaData?.results
+
   return (
     <section className='list'>
       <h1 className='list-name'>
@@ -73,94 +75,103 @@ const MediaList = ({ page }: Props) => {
       </h1>
 
       <div className={styles.mediaListContainer}>
-        {mediaData ? (
+        {data ? (
           <>
-            {(page === MediaEnum.BOOKMARKS ? bookmarkedItems : mediaData.results).map(
-              (item: MediaDataType, index: number) => {
-                // TODO: refactor?
-                const media =
-                  item?.media_type === MediaEnum.TV ? MediaEnum.TV : MediaEnum.MOVIE
-                // TODO: refactor?
-                const urlName =
-                  getMediaTitle(media, item) && getUrlName(getMediaTitle(media, item))
-                const userScore = item?.vote_average * 10
-                return (
-                  <article className={styles.mediaCard} key={item.id}>
-                    {/* Bookmark button */}
-                    {checkInBookmarksStatus(item) ? (
-                      <Tooltip title='Remove bookmark'>
-                        <button
-                          onClick={() => addToBookmarks(item)}
-                          // TODO: refactor bookmark / bookmark-btn--card ?
-                          className='bookmark-btn bookmark-btn--card unbookmark'
-                          aria-label='remove from bookmarks'
-                        >
-                          <img src={NavBookmarkIcon} alt='' />
-                        </button>
-                      </Tooltip>
-                    ) : (
-                      <Tooltip title='Bookmark'>
-                        <button
-                          onClick={() => addToBookmarks(item)}
-                          className='bookmark-btn bookmark-btn--card'
-                          aria-label='add bookmark this media'
-                        >
-                          <img src={NavBookmarkIcon} alt='' />
-                        </button>
-                      </Tooltip>
-                    )}
-                    <img
-                      src={`https://www.themoviedb.org/t/p/w440_and_h660_face${item?.poster_path}`}
-                      alt=''
-                      className={styles.mediaCardPoster}
-                    />
-                    <div className={styles.mediaInfo}>
-                      <div className={styles.userScoreContainer}>
-                        <CircularProgressbar
-                          value={userScore}
-                          text={`${userScore}%`}
-                          background
-                          styles={buildStyles({
-                            // Whether to use rounded or flat corners on the ends - can use 'butt' or 'round'
-                            strokeLinecap: 'butt',
-                            textSize: '1.3rem',
-                            pathTransitionDuration: 0.5,
-                            pathColor: `${
-                              userScore > 65
-                                ? '#2fd71d'
-                                : userScore > 45
-                                ? '#e6ff2a'
-                                : '#de2b2b'
-                            }`,
-                            textColor: 'white',
-                            trailColor: '#3f3e3e',
-                            backgroundColor: '#100c29',
-                          })}
-                        />
-                      </div>
-                      <h4 className={styles.mediaTitle}>
-                        <Link
-                          to={`/${media}/${item.id}-${urlName}`}
-                          state={[item.id, media]}
-                        >
-                          {/* Movies API */}
-                          {media === MediaEnum.MOVIE && item.original_title}
-                          {/* TV Shows API */}
-                          {media === MediaEnum.TV && item.original_name}
-                        </Link>
-                      </h4>
-                      <p className={styles.mediaReleaseDate}>
-                        {media === MediaEnum.MOVIE && item.release_date}
-                        {media === MediaEnum.TV && item.first_air_date}
-                      </p>
+            {data.map((item: MediaDataType, index: number) => {
+              // media = on bookmarks page get media type & title from api for link route?
+              // TODO: refactor?
+              const media =
+                // item?.media_type === MediaEnum.TV ? MediaEnum.TV : MediaEnum.MOVIE
+                // ! why gone media_type not in api ?@?@?@
+                item.original_title ? MediaEnum.MOVIE : MediaEnum.TV
+              // console.log({ media }) // {media: 'movie'}
+              const mediaTitle = getMediaTitle(media, item)
+              // console.log({ mediaTitle }) // {mediaTitle: 'Morbius'}
+              // urlName = if have media title -> generate url for media details page
+              // TODO: refactor?
+              const urlName =
+                getMediaTitle(media, item) && getUrlName(getMediaTitle(media, item))
+              const userScore = item?.vote_average * 10
+              // console.log('item', item)
+
+              return (
+                <article className={styles.mediaCard} key={item.id}>
+                  {/* Bookmark button */}
+                  {checkInBookmarksStatus(item) ? (
+                    <Tooltip title='Remove bookmark'>
+                      <button
+                        onClick={() => addToBookmarks(item)}
+                        // TODO: refactor bookmark / bookmark-btn--card ?
+                        className='bookmark-btn bookmark-btn--card unbookmark'
+                        aria-label='remove from bookmarks'
+                      >
+                        <img src={NavBookmarkIcon} alt='' />
+                      </button>
+                    </Tooltip>
+                  ) : (
+                    <Tooltip title='Bookmark'>
+                      <button
+                        onClick={() => addToBookmarks(item)}
+                        className='bookmark-btn bookmark-btn--card'
+                        aria-label='add bookmark this media'
+                      >
+                        <img src={NavBookmarkIcon} alt='' />
+                      </button>
+                    </Tooltip>
+                  )}
+                  <img
+                    src={`https://www.themoviedb.org/t/p/w440_and_h660_face${item?.poster_path}`}
+                    alt=''
+                    className={styles.mediaCardPoster}
+                  />
+                  <div className={styles.mediaInfo}>
+                    <div className={styles.userScoreContainer}>
+                      <CircularProgressbar
+                        value={userScore}
+                        text={`${userScore}%`}
+                        background
+                        styles={buildStyles({
+                          // Whether to use rounded or flat corners on the ends - can use 'butt' or 'round'
+                          strokeLinecap: 'butt',
+                          textSize: '1.3rem',
+                          pathTransitionDuration: 0.5,
+                          pathColor: `${
+                            userScore > 65
+                              ? '#2fd71d'
+                              : userScore > 45
+                              ? '#e6ff2a'
+                              : '#de2b2b'
+                          }`,
+                          textColor: 'white',
+                          trailColor: '#3f3e3e',
+                          backgroundColor: '#100c29',
+                        })}
+                      />
                     </div>
-                  </article>
-                )
-              }
-            )}
+                    <h4 className={styles.mediaTitle}>
+                      <Link
+                        to={`/${media}/${item.id}-${urlName}`}
+                        state={[item.id, media]}
+                      >
+                        {/* Movies API */}
+                        {/* {page === MediaEnum.MOVIE && item.original_title} */}
+                        {/* TV Shows API */}
+                        {/* {page === MediaEnum.TV && item.original_name} */}
+                        {mediaTitle}
+                      </Link>
+                    </h4>
+                    <p className={styles.mediaReleaseDate}>
+                      {/* {media === MediaEnum.MOVIE && item.release_date} */}
+                      {/* {media === MediaEnum.TV && item.first_air_date} */}
+                      {mediaTitle}
+                    </p>
+                  </div>
+                </article>
+              )
+            })}
             {/* Pagination */}
             {/* // TODO: pagination for bookmarks (update bookmarks state logic? ) */}
-            {page !== MediaEnum.BOOKMARKS && (
+            {page !== MediaEnum.BOOKMARKS && mediaData && (
               <Stack spacing={2} className={styles.pagination}>
                 <Pagination
                   count={
