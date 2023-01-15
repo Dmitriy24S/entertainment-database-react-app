@@ -4,7 +4,7 @@ import React, { useContext, useEffect, useState } from 'react'
 import { buildStyles, CircularProgressbar } from 'react-circular-progressbar'
 import 'react-circular-progressbar/dist/styles.css'
 import { IoMdArrowBack } from 'react-icons/io'
-import { Link, useLocation } from 'react-router-dom'
+import { useLocation, useNavigate } from 'react-router-dom'
 import { AppContext } from '../../App'
 import NavBookmarkIcon from '../../images/icon-nav-bookmark.svg'
 import {
@@ -23,6 +23,8 @@ const MediaDetailsPage = () => {
   ) as AppContextType
   const [mediaData, setMediaData] = useState<MediaDetailType>()
   const [castData, setCastData] = useState<CastDataType>()
+
+  let navigate = useNavigate()
 
   // const { id } = useParams();
   // 338953-fantastic-beasts-the-secrets-of-dumbledore
@@ -84,9 +86,17 @@ const MediaDetailsPage = () => {
 
   return mediaData ? (
     <>
-      <Link to='/' className='return-btn'>
+      <button
+        onClick={() => {
+          navigate(-1)
+        }}
+        title='Go back'
+        className='return-btn'
+      >
         <IoMdArrowBack />
-      </Link>
+      </button>
+      {/* <Link to="/entertainment-database-react-app" className="return-btn"> */}
+      {/* </Link> */}
       <section className='media-container'>
         {mediaData && (
           <>
