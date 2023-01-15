@@ -161,9 +161,9 @@ const MediaList = ({ page }: Props) => {
                       </Link>
                     </h4>
                     <p className={styles.mediaReleaseDate}>
-                      {/* {media === MediaEnum.MOVIE && item.release_date} */}
-                      {/* {media === MediaEnum.TV && item.first_air_date} */}
-                      {mediaTitle}
+                      {media === MediaEnum.MOVIE && item.release_date}
+                      {media === MediaEnum.TV && item.first_air_date}
+                      {/* {mediaTitle} */}
                     </p>
                   </div>
                 </article>
