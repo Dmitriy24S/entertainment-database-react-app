@@ -120,8 +120,8 @@ const MediaDetailsPage = () => {
               </h1>
               <ul className='short-list'>
                 <li>{releaseDate}</li>
-                <li>
-                  <span className='genres'>
+                <li className='genres'>
+                  <span>
                     {mediaData.genres.map(
                       (genre: MovieDetailsGenresType, index: number) =>
                         index !== mediaData.genres.length - 1

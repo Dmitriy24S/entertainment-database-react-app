@@ -53,9 +53,21 @@
 
 .short-list {
   display: flex;
-  gap: 1.5rem;
+  gap: 1rem;
   font-size: 0.9rem;
   color: hsl(0, 0%, 80%);
+  flex-wrap: wrap;
+  li {
+    display: flex;
+  }
+  .genres {
+    display: block;
+    max-width: 206px;
+    margin-left: 1.5rem;
+  }
+  .runtime {
+    margin-left: 1.5rem;
+  }
 }
 // short list - dot separator
 .short-list li::before {
