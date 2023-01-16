@@ -85,7 +85,7 @@ const MediaDetailsPage = () => {
   }
 
   return mediaData ? (
-    <>
+    <section className='media-container'>
       <button
         onClick={() => {
           navigate(-1)
@@ -97,7 +97,7 @@ const MediaDetailsPage = () => {
       </button>
       {/* <Link to="/entertainment-database-react-app" className="return-btn"> */}
       {/* </Link> */}
-      <section className='media-container'>
+      <div className='media-details'>
         {mediaData && (
           <>
             {/* Media poster */}
@@ -195,7 +195,7 @@ const MediaDetailsPage = () => {
             </div>
           </>
         )}
-      </section>
+      </div>
       {/* Media cast */}
       <section className='media-cast-info'>
         <h3 className='cast-title'>The Cast</h3>
@@ -222,7 +222,7 @@ const MediaDetailsPage = () => {
           })}
         </div>
       </section>
-    </>
+    </section>
   ) : (
     <h3>Loading</h3>
   )

@@ -3,7 +3,7 @@
   display: flex;
   color: white;
   flex-direction: column;
-  max-width: 69rem;
+  // max-width: 69rem;
   margin: 0 auto;
   @media (min-width: 850px) {
     flex-direction: row;
@@ -19,7 +19,7 @@
   padding-top: 1rem;
   flex-grow: 2;
   width: 100%;
-  max-width: 65rem;
+  // max-width: 65rem;
   overflow-x: hidden;
   margin: 0 auto;
   @media (min-width: 850px) {
@@ -29,7 +29,8 @@
   .list {
     display: flex;
     flex-direction: column;
-    max-width: 65rem;
+    // max-width: 65rem;
+    max-width: 82rem;
     width: 100%;
     margin: 0 auto;
     margin-bottom: 2rem;
@@ -50,12 +51,16 @@
       overscroll-behavior-inline: contain; // prevent browser forwards/backwards swipe action when swiping inside list
       display: grid;
       grid-auto-flow: column;
-      grid-auto-columns: 17%;
+      grid-auto-columns: 13%;
+      @media (max-width: 600px) {
+        // grid-auto-columns: 33%;
+        grid-auto-columns: 57%;
+      }
       @media (max-width: 920px) {
         grid-auto-columns: 24%;
       }
-      @media (max-width: 600px) {
-        grid-auto-columns: 33%;
+      @media (max-width: 1120px) {
+        grid-auto-columns: 18%;
       }
     }
 

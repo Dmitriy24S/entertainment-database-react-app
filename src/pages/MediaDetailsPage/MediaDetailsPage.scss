@@ -16,11 +16,16 @@
 }
 
 .media-container {
+  margin: 0 auto;
+  margin-top: 1rem;
+}
+
+.media-details {
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
   align-items: flex-start;
-  margin-top: 1rem;
+  gap: 1.5rem;
+  max-width: 60rem;
   @media (min-width: 640px) {
     flex-direction: row;
   }
