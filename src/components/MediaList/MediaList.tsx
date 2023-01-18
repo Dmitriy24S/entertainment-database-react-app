@@ -169,6 +169,11 @@ const MediaList = ({ page }: Props) => {
                 </article>
               )
             })}
+            {/* No Bookmarks */}
+            {/* // TODO: cleanup refactor code? */}
+            {page === MediaEnum.BOOKMARKS && data.length === 0 && (
+              <h4 className={styles.mediaListMessage}>Your bookmarks are empty.</h4>
+            )}
             {/* Pagination */}
             {/* // TODO: pagination for bookmarks (update bookmarks state logic? ) */}
             {page !== MediaEnum.BOOKMARKS && mediaData && (
