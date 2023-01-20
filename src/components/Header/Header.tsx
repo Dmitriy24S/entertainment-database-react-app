@@ -22,7 +22,7 @@ const Header = () => {
       <div className='header-container'>
         <div className='header-inner'>
           <div className='header-content'>
-            <Link to={'/'}>
+            <Link to={'/'} onClick={() => setActiveMenu('home')}>
               <img src={Logo} alt='' />
             </Link>
             <ul className='nav-menu'>
