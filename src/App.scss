@@ -51,17 +51,20 @@
       overscroll-behavior-inline: contain; // prevent browser forwards/backwards swipe action when swiping inside list
       display: grid;
       grid-auto-flow: column;
-      grid-auto-columns: 13%;
-      @media (max-width: 600px) {
+      // grid-auto-columns: 13%;
+      grid-auto-columns: 40%;
+      @media (min-width: 600px) {
         // grid-auto-columns: 33%;
-        grid-auto-columns: 57%;
+        // grid-auto-columns: 57%;
+        grid-auto-columns: 20%;
       }
-      @media (max-width: 920px) {
-        grid-auto-columns: 24%;
+      @media (min-width: 920px) {
+        // grid-auto-columns: 24%;
+        grid-auto-columns: 13%;
       }
-      @media (max-width: 1120px) {
-        grid-auto-columns: 18%;
-      }
+      // @media (min-width: 1120px) {
+      // grid-auto-columns: 18%;
+      // }
     }
 
     .media-poster {
