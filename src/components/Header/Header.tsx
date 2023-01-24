@@ -1,5 +1,5 @@
 import Tooltip from '@mui/material/Tooltip'
-import { useContext } from 'react'
+import { useContext, useEffect } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import { AppContext } from '../../App'
 import NavBookmarkIcon from '../../images/icon-nav-bookmark.svg'
@@ -16,6 +16,11 @@ const Header = () => {
   const { activeMenu, setActiveMenu } = useContext(AppContext) as AppContextType
 
   let location = useLocation()
+
+  // Scroll to top on category change
+  useEffect(() => {
+    window.scrollTo({ top: 0 })
+  }, [activeMenu])
 
   return (
     <header className='App-header'>
