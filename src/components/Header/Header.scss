@@ -2,7 +2,7 @@
   background-color: #161d2f;
   display: flex;
   flex-direction: column;
-  position: relative;
+  // position: relative;
   padding: 1rem 0;
   justify-content: center;
   align-items: center;
@@ -15,6 +15,9 @@
     align-items: flex-end;
     background-color: transparent;
     padding: 0;
+    width: auto;
+    height: auto;
+    position: relative;
   }
 }
 
