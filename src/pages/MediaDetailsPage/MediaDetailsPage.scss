@@ -7,6 +7,7 @@
   width: min-content;
   left: -1rem;
   position: relative;
+  margin-bottom: 1rem;
   svg {
     font-size: 2rem;
   }
@@ -20,7 +21,8 @@
   margin-top: 1rem;
   width: 100%;
   // fixes width overflow md< screen
-  max-width: 60rem;
+  // max-width: 60rem;
+  max-width: 82rem;
 }
 
 .media-details {
@@ -35,7 +37,9 @@
 }
 
 .media-poster-full {
-  width: 16rem;
+  min-width: 16rem;
+  max-width: 23rem;
+  width: 100%;
   margin: 0 auto;
   @media (min-width: 640px) {
     margin: 0;
@@ -138,7 +142,8 @@
     margin-top: 1rem;
     display: flex;
     gap: 1.3rem;
-    overflow-x: scroll;
+    // overflow-x: scroll;
+    overflow-x: auto; // hide when not needed
     scroll-snap-type: x mandatory; // scroll snap part 1
     overscroll-behavior-inline: contain; // prevent browser forwards/backwards swipe action when swiping inside list
 
