@@ -35,6 +35,9 @@
     width: 100%;
     margin: 0 auto;
     margin-bottom: 2rem;
+    // !
+    // TODO: file / css structure
+    // max-width: 60rem;
 
     .list-name {
       text-align: left;
@@ -48,7 +51,7 @@
       margin-top: 1rem;
       overflow-y: hidden;
       overflow-x: scroll;
-      scroll-snap-type: x mandatory;
+      // scroll-snap-type: x mandatory;
       overscroll-behavior-inline: contain; // prevent browser forwards/backwards swipe action when swiping inside list
       display: grid;
       grid-auto-flow: column;
