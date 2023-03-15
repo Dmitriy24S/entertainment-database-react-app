@@ -5,7 +5,15 @@
   .grid {
     gap: 2rem;
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    grid-template-columns: repeat(
+      auto-fit,
+      minmax(200px, 1fr)
+    ); // ! not reduce width like 1ft, but if less than 4 -> e.g. bookmarks with 1fr: causes extra empty width
+    grid-template-columns: repeat(
+      auto-fill,
+      minmax(200px, 1fr)
+    ); // ! better? not stretch to fill width?
+    // justify-content: center;
 
     .mediaCard {
       margin-bottom: 1rem;
