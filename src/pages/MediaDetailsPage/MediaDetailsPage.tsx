@@ -29,8 +29,49 @@ const MediaDetailsPage = () => {
   // const { id } = useParams();
   // 338953-fantastic-beasts-the-secrets-of-dumbledore
 
+  const location = useLocation()
+  console.log('location:', location)
+  //   {
+  //     "pathname": "/movie/315162-puss-in-boots-the-last-wish",
+  //     "search": "",
+  //     "hash": "",
+  //     "state": [
+  //         315162,
+  //         "movie"
+  //     ],
+  //     "key": "8cip38jm"
+  // }
+  // ! direct url -> state: null -> empty page, no state
+  const { pathname } = location
+
   const { state }: any = useLocation() // 338953 - media id // array: (2) [92782, 'tv'] 0: 92782 1: "tv"
-  const [mediaId, mediaType] = state
+  console.log('state:', state)
+  // state: (2) [315162, 'movie']
+  // ! direct url -> state: null -> empty page, no state
+
+  // const [mediaId, mediaType] = state
+
+  const extractMediaInfoFromURL = (pathname: string) => {
+    const [mediaType, idString] = pathname.split('/').filter(Boolean) // split and filter out any empty strings
+    console.log(pathname.split('/').filter(Boolean))
+    // (2) ['movie', '315162-puss-in-boots-the-last-wish']
+    console.log('mediaType:', mediaType)
+    // mediaType: movie
+    console.log('idString:', idString)
+    // idString: 315162-puss-in-boots-the-last-wish
+    const match = idString.match(/^\d+/) //  match media id number from url path, match one or more digits at the beginning of the string
+    console.log('match:', match)
+    // match: ['315162', index: 0, input: '315162-puss-in-boots-the-last-wish', groups: undefined]
+
+    const mediaId = match ? match[0] : null
+    console.log('mediaId:', mediaId)
+    // mediaId: 315162
+    return { mediaType, mediaId }
+  }
+
+  // ! direct url -> state: null -> empty page, no state
+  // instead of useLocation state:
+  const { mediaType, mediaId } = extractMediaInfoFromURL(pathname)
 
   let userScore = 0
   if (mediaData) {
@@ -61,7 +102,8 @@ const MediaDetailsPage = () => {
     }
 
     fetchData()
-  }, [])
+    // }, [])
+  }, [state, mediaId, mediaType])
 
   const calcRuntime = (minutesRuntime: number) => {
     let hours = minutesRuntime / 60
