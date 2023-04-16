@@ -15,7 +15,7 @@ const Row: React.FC<RowProps> = ({ data, mediaType }) => {
   const rightButtonRef = useRef<HTMLButtonElement>(null)
   const containerRef = useHorizontalScroll(leftButtonRef, rightButtonRef)
 
-  const mediaApiTitle = mediaType === 'movies' ? 'title' : 'original_name'
+  const mediaApiTitle = mediaType === 'movies' ? 'title' : 'name'
 
   const LeftSrollButton = () => (
     <button
@@ -43,7 +43,7 @@ const Row: React.FC<RowProps> = ({ data, mediaType }) => {
   return (
     <section className='list'>
       <h1 className='list-name'>
-        {mediaType === 'movies' ? 'Popular movies' : 'Trending shows'}{' '}
+        {mediaType === 'movies' ? 'Popular movies' : 'Trending shows'}
       </h1>
       {/* Container */}
       <div className={styles.container} ref={containerRef}>
@@ -63,7 +63,8 @@ const Row: React.FC<RowProps> = ({ data, mediaType }) => {
               <MediaCard
                 mediaItem={mediaItem}
                 urlName={urlName}
-                title={mediaItem.title}
+                // title={mediaItem.title}
+                title={mediaItem[mediaApiTitle]}
                 mediaType={mediaType}
                 key={mediaItem.id}
               />

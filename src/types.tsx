@@ -36,6 +36,7 @@ export interface MediaDataType {
   popularity: number // 48.261451
   // TODO: refactor values missing?
   media_type?: string
+  name: string
 }
 
 export interface CastDataType {
