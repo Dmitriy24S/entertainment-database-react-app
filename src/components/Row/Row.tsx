@@ -65,7 +65,8 @@ const Row: React.FC<RowProps> = ({ data, mediaType }) => {
                 urlName={urlName}
                 // title={mediaItem.title}
                 title={mediaItem[mediaApiTitle]}
-                mediaType={mediaType}
+                // mediaType={mediaType}
+                mediaType={mediaType === 'movies' ? 'movie' : 'tv'}
                 key={mediaItem.id}
               />
             )
