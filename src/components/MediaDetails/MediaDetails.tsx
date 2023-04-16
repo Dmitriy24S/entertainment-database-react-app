@@ -170,7 +170,8 @@ const MediaDetails = () => {
                   <li className={styles.runtime}>
                     {mediaType === MediaType.MOVIE
                       ? calcRuntime(mediaData.runtime)
-                      : `${mediaData.episode_run_time[0]}min`}
+                      : `${mediaData.last_episode_to_air.runtime}min`}
+                    {/* : `${mediaData.episode_run_time[0]}min`} */}
                   </li>
                 </ul>
                 <div className={styles.interactiveContainer}>

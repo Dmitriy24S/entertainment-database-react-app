@@ -229,4 +229,5 @@ interface tvLastEpisodeType {
   still_path: string //  "/3x8tJon5jXFa1ziAM93hPKNyW7i.jpg";
   vote_average: number // 4.8;
   vote_count: number // 106;
+  runtime: number
 }
