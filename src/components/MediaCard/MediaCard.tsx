@@ -49,8 +49,9 @@ const MediaCard = ({ mediaItem, urlName, title, mediaType }: MediaCardProps) => 
       <Link
         to={`/${mediaType}/${mediaItem.id}-${urlName}`}
         state={[mediaItem.id, mediaType]}
+        className='media-card-title'
       >
-        <h4 className='media-card-title'>{title}</h4>
+        {title}
       </Link>
     </article>
   )
