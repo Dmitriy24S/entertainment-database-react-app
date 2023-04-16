@@ -1,0 +1,15 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  max-width: 82rem;
+  width: 100%;
+  margin: 0 auto;
+  margin-bottom: 2rem;
+}
+
+.header {
+  text-align: left;
+  text-transform: capitalize;
+  font-size: 1.3rem;
+  margin-bottom: 0.5rem;
+}

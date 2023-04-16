@@ -26,88 +26,10 @@
   @media (min-width: 850px) {
     padding-top: 2rem;
   }
+}
 
-  .list {
-    display: flex;
-    flex-direction: column;
-    // max-width: 65rem;
-    max-width: 82rem;
-    width: 100%;
-    margin: 0 auto;
-    margin-bottom: 2rem;
-    // !
-    // TODO: file / css structure
-    // max-width: 60rem;
-
-    .list-name {
-      text-align: left;
-      text-transform: capitalize;
-      font-size: 1.3rem;
-      margin-bottom: 0.5rem;
-    }
-
-    .list-items {
-      gap: 1.2rem;
-      margin-top: 1rem;
-      overflow-y: hidden;
-      overflow-x: scroll;
-      // scroll-snap-type: x mandatory;
-      overscroll-behavior-inline: contain; // prevent browser forwards/backwards swipe action when swiping inside list
-      display: grid;
-      grid-auto-flow: column;
-      // grid-auto-columns: 13%;
-      grid-auto-columns: 40%;
-      @media (min-width: 600px) {
-        // grid-auto-columns: 33%;
-        // grid-auto-columns: 57%;
-        grid-auto-columns: 20%;
-      }
-      @media (min-width: 920px) {
-        // grid-auto-columns: 24%;
-        grid-auto-columns: 13%;
-      }
-      // @media (min-width: 1120px) {
-      // grid-auto-columns: 18%;
-      // }
-    }
-
-    .media-poster {
-      border-radius: 10px;
-      scroll-snap-align: start;
-      width: 100%;
-    }
-
-    .media-card {
-      max-width: 245px;
-      position: relative;
-      margin-bottom: 0.1rem;
-      &:after {
-        content: '';
-        position: absolute;
-        bottom: 0;
-        height: 100%;
-        left: 0;
-        right: 0;
-        background-image: linear-gradient(181deg, transparent 68%, black);
-        z-index: 1;
-      }
-
-      .media-card-title {
-        position: absolute;
-        z-index: 2;
-        font-size: 1rem;
-        font-weight: 400;
-        text-align: left;
-        left: 0px;
-        bottom: 10px;
-        text-shadow: 1px 0 20px #000, 0 -1px 0 #000, 0 1px 20px #000, -1px 0 0 #000;
-        width: 100%;
-        padding: 0.3rem;
-        padding-left: 10px;
-        &:hover {
-          text-decoration: underline;
-        }
-      }
-    }
-  }
+.CircularProgressbar-text {
+  // font-weight: 700;
+  dominant-baseline: middle; // !
+  text-anchor: middle; // !
 }

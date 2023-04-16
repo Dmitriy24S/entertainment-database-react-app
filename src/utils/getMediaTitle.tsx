@@ -1,6 +1,6 @@
-import { MediaDataType, MediaEnum } from '../types'
+import { MediaDataType, MediaType } from '../types'
 
-export const getMediaTitle = (media: MediaEnum, item: MediaDataType) => {
+export const getMediaTitle = (media: MediaType, item: MediaDataType) => {
   // return movie or tv show name:
-  return media === MediaEnum.MOVIE ? item.title : item.original_name
+  return media === MediaType.MOVIE ? item.title : item.name
 }

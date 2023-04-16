@@ -1,0 +1,51 @@
+.bookmarkButton {
+  position: absolute;
+  z-index: 5;
+  top: 0.5rem;
+  right: 0.5rem;
+  margin-left: 1.5rem;
+  padding: 0.7rem;
+  border-radius: 50%;
+  background-color: rgb(19, 14, 43);
+
+  // color: #4f4dbb;
+  color: #49488d;
+  transition: color 80ms ease-out, border-color 80ms ease-out;
+  @media (hover) {
+    &:hover,
+    &:focus-visible {
+      color: #6563e3;
+    }
+  }
+}
+
+.fullPageBookmarkButton {
+  position: relative;
+  top: 0;
+  right: 0;
+  background-color: transparent;
+  background-color: rgb(10, 7, 29);
+  border: 1px solid #49488d;
+  &:hover,
+  &:focus-visible {
+    border-color: #6563e3;
+  }
+
+  &.activeBookmarkButton {
+    border: 1px solid rgb(232, 4, 4);
+    &:hover,
+    &:focus-visible {
+      border-color: rgb(194, 0, 0);
+    }
+  }
+}
+
+.activeBookmarkButton {
+  color: rgb(232, 4, 4);
+  @media (hover) {
+    &:hover,
+    &:focus-visible {
+      color: rgb(194, 0, 0);
+    }
+  }
+}

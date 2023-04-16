@@ -1,4 +1,14 @@
-export enum MediaEnum {
+// export type MediaType = {
+//   TV: 'tv'
+//   MOVIE: 'movie'
+//   BOOKMARKS: 'bookmarks'
+// }
+// export interface MediaType {
+//   TV: 'tv'
+//   MOVIE: 'movie'
+//   BOOKMARKS: 'bookmarks'
+// }
+export enum MediaType {
   TV = 'tv',
   MOVIE = 'movie',
   BOOKMARKS = 'bookmarks',

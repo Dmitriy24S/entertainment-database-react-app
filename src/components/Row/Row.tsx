@@ -1,13 +1,16 @@
 import React, { useRef } from 'react'
 import { AiOutlineArrowLeft, AiOutlineArrowRight } from 'react-icons/ai'
+
 import useHorizontalScroll from '../../hooks/useHorizontalScroll'
-import { MediaDataType } from '../../types'
+import { MediaDataType, MediaType } from '../../types'
 import MediaCard from '../MediaCard/MediaCard'
+
+import sharedStyles from '../../shared/sharedStyles.module.scss'
 import styles from './Row.module.scss'
 
 interface RowProps {
   data: MediaDataType[]
-  mediaType: 'movies' | 'tv'
+  mediaType: MediaType
 }
 
 const Row: React.FC<RowProps> = ({ data, mediaType }) => {
@@ -15,7 +18,7 @@ const Row: React.FC<RowProps> = ({ data, mediaType }) => {
   const rightButtonRef = useRef<HTMLButtonElement>(null)
   const containerRef = useHorizontalScroll(leftButtonRef, rightButtonRef)
 
-  const mediaApiTitle = mediaType === 'movies' ? 'title' : 'name'
+  const mediaApiTitle = mediaType === MediaType.MOVIE ? 'title' : 'name'
 
   const LeftSrollButton = () => (
     <button
@@ -41,16 +44,16 @@ const Row: React.FC<RowProps> = ({ data, mediaType }) => {
   )
 
   return (
-    <section className='list'>
-      <h1 className='list-name'>
-        {mediaType === 'movies' ? 'Popular movies' : 'Trending shows'}
+    <section className={sharedStyles.container}>
+      <h1 className={sharedStyles.header}>
+        {mediaType === MediaType.MOVIE ? 'Popular movies' : 'Trending shows'}
       </h1>
-      {/* Container */}
-      <div className={styles.container} ref={containerRef}>
+      {/* Outer Container */}
+      <div className={styles.itemsOuterContainer} ref={containerRef}>
         <LeftSrollButton />
         <RightSrollButton />
-        {/* List */}
-        <div className='list-items'>
+        {/* Inner Container */}
+        <div className={styles.itemsInnerContainer}>
           {data.map((mediaItem: MediaDataType) => {
             // Put "-"" instead space in movie title for url:
             const urlName = mediaItem[mediaApiTitle]
@@ -65,8 +68,7 @@ const Row: React.FC<RowProps> = ({ data, mediaType }) => {
                 urlName={urlName}
                 // title={mediaItem.title}
                 title={mediaItem[mediaApiTitle]}
-                // mediaType={mediaType}
-                mediaType={mediaType === 'movies' ? 'movie' : 'tv'}
+                mediaType={mediaType}
                 key={mediaItem.id}
               />
             )

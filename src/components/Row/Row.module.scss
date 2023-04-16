@@ -1,4 +1,4 @@
-.container {
+.itemsOuterContainer {
   position: relative;
 }
 
@@ -21,4 +21,25 @@
 
 .rightButton {
   right: 1rem; // ! 'right' changes to this property will trigger: 'Paint', which can impact performance.webhintdetect-css-reflows/paint
+}
+
+.itemsInnerContainer {
+  gap: 1.2rem;
+  margin-top: 1rem;
+  overflow-y: hidden;
+  overflow-x: scroll;
+  // scroll-snap-type: x mandatory;
+  overscroll-behavior-inline: contain; // prevent browser forwards/backwards swipe action when swiping inside list
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: 40%;
+  @media (min-width: 600px) {
+    grid-auto-columns: 20%;
+  }
+  @media (min-width: 920px) {
+    grid-auto-columns: 13%;
+  }
+  // @media (min-width: 1120px) {
+  // grid-auto-columns: 18%;
+  // }
 }

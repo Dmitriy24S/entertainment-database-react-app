@@ -1,12 +1,13 @@
-import { MediaEnum } from '../types'
+import { MediaType } from '../types'
 
-// export const getMediaApiUrl = (media: MediaEnum.MOVIE | MediaEnum.TV) => {
-export const getMediaApiUrl = (media: MediaEnum) => {
-  if (media.toLocaleLowerCase() === MediaEnum.TV) {
-    return 'https://api.themoviedb.org/3/tv/popular?api_key='
+export const apiBaseUrl = 'https://api.themoviedb.org/3'
+
+export const getMediaApiUrl = (media: MediaType) => {
+  if (media.toLocaleLowerCase() === MediaType.TV) {
+    return `${apiBaseUrl}/trending/tv/day?api_key=`
   }
-  if (media.toLocaleLowerCase() === MediaEnum.MOVIE) {
-    return 'https://api.themoviedb.org/3/movie/now_playing?api_key='
+  if (media.toLocaleLowerCase() === MediaType.MOVIE) {
+    return `${apiBaseUrl}/movie/now_playing?api_key=`
   }
   return null
 }

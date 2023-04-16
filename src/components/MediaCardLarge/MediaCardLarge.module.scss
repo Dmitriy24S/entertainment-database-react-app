@@ -1,0 +1,54 @@
+.mediaCard {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  position: relative;
+  background-color: rgb(25 33 52);
+  border-radius: 10px;
+  padding-bottom: 2rem;
+  margin-bottom: 0.1rem;
+  margin: 0 auto; // for grid mobile bigger card to centered?
+  width: 100%;
+  flex: 1 19%; // !
+  max-width: 245px;
+  @media (max-width: 920px) {
+    flex: 1 25%;
+  }
+  @media (max-width: 600px) {
+    flex: 1 46%;
+  }
+}
+
+.mediaCardPoster {
+  object-fit: cover;
+  height: 294px; // if no img placement card spacing fix? text positioning
+}
+
+.mediaInfo {
+  position: relative;
+  margin-top: 2rem;
+  padding: 0.7rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.mediaTitle {
+  font-size: 1.4rem;
+  font-weight: 500;
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+.mediaReleaseDate {
+  margin-top: 0.5rem;
+  font-size: 0.9rem;
+  color: hsl(250, 14%, 68%);
+}
+
+.userScoreContainer {
+  position: absolute;
+  top: -3.5rem;
+  width: 50px;
+}
