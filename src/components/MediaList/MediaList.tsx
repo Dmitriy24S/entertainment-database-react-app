@@ -86,9 +86,9 @@ const MediaList = ({ pageMediaType }: Props) => {
           <h4 className={styles.mediaListMessage}>Your bookmarks are empty.</h4>
         )}
         {/* Loading */}
-        {data.length === 0 && <Spinner />}
+        {pageMediaType !== MediaType.BOOKMARKS && data.length === 0 && <Spinner />}
         {/* Data */}
-        {data.length > 1 && (
+        {data.length > 0 && (
           <>
             <div className={styles.grid}>
               {data.map((item: MediaDataType) => {
