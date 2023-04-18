@@ -1,21 +1,21 @@
 import Pagination from '@mui/material/Pagination'
 import Stack from '@mui/material/Stack'
 import axios from 'axios'
-import React, { useContext, useEffect, useState } from 'react'
-
-import { AppContext } from '../../App'
-import { AppContextType, MediaDataType, MediaListDataType, MediaType } from '../../types'
+import React, { useEffect, useState } from 'react'
 
 import Spinner from '../../components/Spinner/Spinner'
 import MediaCardLarge from '../MediaCardLarge/MediaCardLarge'
 
+import { useBookmarksContext } from '../../context/ContextProvider'
 import { getApiKey } from '../../utils/getApiKey'
 import { getMediaApiUrl } from '../../utils/getMediaApiUrl'
 import { getMediaTitle } from '../../utils/getMediaTitle'
 import { getUrlName } from '../../utils/getUrlName'
+import { getUserScore } from '../../utils/getUserScore'
+
+import { CombinedMediaType, MediaListDataType, MediaType } from '../../types'
 
 import sharedStyles from '../../shared/sharedStyles.module.scss'
-import { getUserScore } from '../../utils/getUserScore'
 import styles from './MediaList.module.scss'
 
 type Props = {
@@ -34,7 +34,8 @@ const initialMediaDataState: MediaListDataType = {
 }
 
 const MediaList = ({ pageMediaType }: Props) => {
-  const { bookmarkedItems } = useContext(AppContext) as AppContextType
+  console.count('Bookmarks')
+  const { bookmarkedItems } = useBookmarksContext()
 
   const [mediaData, setMediaData] = useState<MediaListDataType>(initialMediaDataState)
   const [selectedPage, setSelectedPage] = useState(1)
@@ -91,7 +92,7 @@ const MediaList = ({ pageMediaType }: Props) => {
         {data.length > 0 && (
           <>
             <div className={styles.grid}>
-              {data.map((item: MediaDataType) => {
+              {data.map((item: CombinedMediaType) => {
                 const media = item.original_title ? MediaType.MOVIE : MediaType.TV // media = on bookmarks page get media type & title from api for link route?
                 const mediaTitle = getMediaTitle(media, item)
                 const urlName =

@@ -1,15 +1,15 @@
-import { useContext } from 'react'
 import { Link } from 'react-router-dom'
 
-import { AppContext } from '../../App'
-import { AppContextType, MediaDataType, MediaType } from '../../types'
+import { useBookmarksContext } from '../../context/ContextProvider'
 import Bookmark from '../Bookmark/Bookmark'
-
 import MediaRatingCircularProgressBar from '../MediaRatingCircularProgressBar/MediaRatingCircularProgressBar'
+
+import { CombinedMediaType, MediaType } from '../../types'
+
 import styles from './MediaCardLarge.module.scss'
 
 interface MediaCardLargeProps {
-  item: MediaDataType
+  item: CombinedMediaType
   userScore: number
   media: MediaType // !
   urlName: string
@@ -23,9 +23,7 @@ const MediaCardLarge: React.FC<MediaCardLargeProps> = ({
   urlName,
   mediaTitle,
 }) => {
-  const { addToBookmarks, checkInBookmarksStatus } = useContext(
-    AppContext
-  ) as AppContextType
+  const { addToBookmarks, checkInBookmarksStatus } = useBookmarksContext()
 
   return (
     <article className={styles.mediaCard}>

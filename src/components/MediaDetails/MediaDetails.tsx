@@ -1,36 +1,32 @@
 import axios from 'axios'
-import { useContext, useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { IoMdArrowBack } from 'react-icons/io'
 import { useLocation, useNavigate } from 'react-router-dom'
 
-import { AppContext } from '../../App'
+import { useBookmarksContext } from '../../context/ContextProvider'
+import { getApiKey } from '../../utils/getApiKey'
+import { apiBaseUrl } from '../../utils/getMediaApiUrl'
+import { getUserScore } from '../../utils/getUserScore'
+import Bookmark from '../Bookmark/Bookmark'
+import MediaRatingCircularProgressBar from '../MediaRatingCircularProgressBar/MediaRatingCircularProgressBar'
+import Spinner from '../Spinner/Spinner'
+
 import {
   ActorInfoDataType,
-  AppContextType,
   CastDataType,
-  MediaDetailType,
+  CombinedMediaType,
   MediaType,
   MovieDetailsGenresType,
 } from '../../types'
 
-import { getUserScore } from '../../utils/getUserScore'
-import Spinner from '../Spinner/Spinner'
-
-import { getApiKey } from '../../utils/getApiKey'
-import { apiBaseUrl } from '../../utils/getMediaApiUrl'
-import Bookmark from '../Bookmark/Bookmark'
-
-import MediaRatingCircularProgressBar from '../MediaRatingCircularProgressBar/MediaRatingCircularProgressBar'
 import styles from './MediaDetails.module.scss'
 
 const apiCastProfileImgUrl = 'https://www.themoviedb.org/t/p/w276_and_h350_face'
 const apiKey = getApiKey()
 
 const MediaDetails = () => {
-  const { addToBookmarks, checkInBookmarksStatus } = useContext(
-    AppContext
-  ) as AppContextType
-  const [mediaData, setMediaData] = useState<MediaDetailType>()
+  const { addToBookmarks, checkInBookmarksStatus } = useBookmarksContext()
+  const [mediaData, setMediaData] = useState<CombinedMediaType>()
   const [castData, setCastData] = useState<CastDataType>()
 
   let navigate = useNavigate()

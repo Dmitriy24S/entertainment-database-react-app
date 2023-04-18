@@ -1,24 +1,20 @@
-import { useContext } from 'react'
 import { Link } from 'react-router-dom'
 
-import { AppContext } from '../../App'
-import { AppContextType, MediaDataType } from '../../types'
-
+import { useBookmarksContext } from '../../context/ContextProvider'
+import { CombinedMediaType } from '../../types'
 import Bookmark from '../Bookmark/Bookmark'
 
 import styles from './MediaCard.module.scss'
 
 interface MediaCardProps {
-  mediaItem: MediaDataType
+  mediaItem: CombinedMediaType
   urlName: string
   title: string
   mediaType: string
 }
 
 const MediaCard = ({ mediaItem, urlName, title, mediaType }: MediaCardProps) => {
-  const { addToBookmarks, checkInBookmarksStatus } = useContext(
-    AppContext
-  ) as AppContextType
+  const { addToBookmarks, checkInBookmarksStatus } = useBookmarksContext()
 
   return (
     <article className={styles.mediaCard}>

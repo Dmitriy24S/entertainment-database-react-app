@@ -1,11 +1,12 @@
-import { useContext } from 'react'
-import { AppContext } from '../../App'
-import { AppContextType, MediaType } from '../../types'
-
 import Row from '../../components/Row/Row'
+import { useDataContext } from '../../context/ContextProvider'
+
+import { MediaType } from '../../types'
 
 const Main = () => {
-  const { dataPopularMovies, dataTrendingTv } = useContext(AppContext) as AppContextType
+  console.count('Main')
+
+  const { dataPopularMovies, dataTrendingTv } = useDataContext()
 
   return (
     <>

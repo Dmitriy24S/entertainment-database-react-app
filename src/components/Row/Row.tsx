@@ -2,14 +2,15 @@ import React, { useRef } from 'react'
 import { AiOutlineArrowLeft, AiOutlineArrowRight } from 'react-icons/ai'
 
 import useHorizontalScroll from '../../hooks/useHorizontalScroll'
-import { MediaDataType, MediaType } from '../../types'
 import MediaCard from '../MediaCard/MediaCard'
+
+import { CombinedMediaType, MediaType } from '../../types'
 
 import sharedStyles from '../../shared/sharedStyles.module.scss'
 import styles from './Row.module.scss'
 
 interface RowProps {
-  data: MediaDataType[]
+  data: CombinedMediaType[]
   mediaType: MediaType
 }
 
@@ -54,7 +55,7 @@ const Row: React.FC<RowProps> = ({ data, mediaType }) => {
         <RightSrollButton />
         {/* Inner Container */}
         <div className={styles.itemsInnerContainer}>
-          {data.map((mediaItem: MediaDataType) => {
+          {data.map((mediaItem: CombinedMediaType) => {
             // Put "-"" instead space in movie title for url:
             const urlName = mediaItem[mediaApiTitle]
               .trim()
