@@ -5,6 +5,7 @@
 .rowButton {
   position: absolute;
   z-index: 20;
+  left: 1rem;
   top: 50%;
   transform: translateY(-50%);
   width: 30px;
@@ -20,6 +21,7 @@
 }
 
 .rightButton {
+  left: auto;
   right: 1rem; // ! 'right' changes to this property will trigger: 'Paint', which can impact performance.webhintdetect-css-reflows/paint
 }
 
