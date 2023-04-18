@@ -1,6 +1,7 @@
 import Tooltip from '@mui/material/Tooltip'
 import { useEffect, useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
+
 import NavBookmarkIcon from '../../images/icon-nav-bookmark.svg'
 import NavHomeIcon from '../../images/icon-nav-home.svg'
 import NavMoviesIcon from '../../images/icon-nav-movies.svg'
@@ -14,7 +15,7 @@ const Header = () => {
   console.count('Header')
   const [activeMenu, setActiveMenu] = useState('/')
 
-  let location = useLocation()
+  const location = useLocation()
 
   // Scroll to top on category change
   useEffect(() => {
@@ -30,10 +31,24 @@ const Header = () => {
 
     const capitelizedTitle = capitalizeStringFirstLetter(title)
 
+    const getUrlHref = (title: string) => {
+      switch (title) {
+        case 'home':
+          return '/'
+        case 'tv shows':
+          return '/tv'
+        default:
+          return `/${title}`
+      }
+    }
+
+    // const urlHref = title === 'home' ? '/' : title === 'tv shows' ? '/tv' : `/${title}`
+    const urlHref = getUrlHref(title)
+
     return (
       <Tooltip title={capitelizedTitle}>
         <Link
-          to={title === 'home' ? '/' : `/${title}`}
+          to={urlHref}
           className={
             location.pathname === `/${title}` || activeMenu === title ? 'active-menu' : ''
           }
