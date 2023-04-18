@@ -54,7 +54,7 @@ const Row: React.FC<RowProps> = ({ data, mediaType }) => {
         <LeftSrollButton />
         <RightSrollButton />
         {/* Inner Container */}
-        <div className={styles.itemsInnerContainer}>
+        <div className={styles.itemsInnerContainer} id='row'>
           {data.map((mediaItem: CombinedMediaType) => {
             // Put "-"" instead space in movie title for url:
             const urlName = mediaItem[mediaApiTitle]

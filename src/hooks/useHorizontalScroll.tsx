@@ -1,6 +1,5 @@
 import { RefObject, useEffect, useRef } from 'react'
 
-// const useHorizontalScroll = (leftButtonClass: string, rightButtonClass: string) => {
 const useHorizontalScroll = (
   leftButtonRef: RefObject<HTMLButtonElement>,
   rightButtonRef: RefObject<HTMLButtonElement>
@@ -16,23 +15,20 @@ const useHorizontalScroll = (
     const leftButton = leftButtonRef.current
     const rightButton = rightButtonRef.current
 
-    // const leftButton = element.querySelector(`.${leftButtonClass}`) as HTMLButtonElement
-    // const rightButton = element.querySelector(`.${rightButtonClass}`) as HTMLButtonElement
-
-    const overflowListContainer = element.querySelector('.list-items') as HTMLDivElement
+    const overflowRowContainer = element.querySelector('#row') as HTMLDivElement
 
     const handleLeftClick = () => {
       console.log('left')
-      overflowListContainer.scrollTo({
-        left: overflowListContainer.scrollLeft - 600,
+      overflowRowContainer.scrollTo({
+        left: overflowRowContainer.scrollLeft - 600,
         behavior: 'smooth',
       })
     }
 
     const handleRightClick = () => {
       console.log('right')
-      overflowListContainer.scrollTo({
-        left: overflowListContainer.scrollLeft + 600,
+      overflowRowContainer.scrollTo({
+        left: overflowRowContainer.scrollLeft + 600,
         behavior: 'smooth',
       })
     }
