@@ -1,13 +1,27 @@
+import { apiBaseUrl } from '../const/apiBaseUrl'
 import { MediaType } from '../types'
+import { getApiKey } from './getApiKey'
 
-export const apiBaseUrl = 'https://api.themoviedb.org/3'
+const apiKey = getApiKey()
 
 export const getMediaApiUrl = (media: MediaType) => {
-  if (media.toLocaleLowerCase() === MediaType.TV) {
-    return `${apiBaseUrl}/trending/tv/day?api_key=`
+  if (media === MediaType.TV) {
+    return `${apiBaseUrl}/trending/tv/day?api_key=${apiKey}&language=en-US`
   }
-  if (media.toLocaleLowerCase() === MediaType.MOVIE) {
-    return `${apiBaseUrl}/movie/now_playing?api_key=`
+  if (media === MediaType.MOVIE) {
+    return `${apiBaseUrl}/movie/now_playing?api_key=${apiKey}&language=en-US`
   }
-  return null
+  return ''
+}
+
+export const getMovieDetailsApiUrl = (mediaId: string) => {
+  const detailsUrl = `${apiBaseUrl}/movie/${mediaId}?api_key=${apiKey}&language=en-US`
+  const castUrl = `${apiBaseUrl}/movie/${mediaId}/credits?api_key=${apiKey}`
+  return { detailsUrl, castUrl }
+}
+
+export const getTVDetailsApiUrl = (mediaId: string) => {
+  const detailsUrl = `${apiBaseUrl}/tv/${mediaId}?api_key=${apiKey}&language=en-US`
+  const castUrl = `${apiBaseUrl}/tv/${mediaId}/aggregate_credits?api_key=${apiKey}`
+  return { detailsUrl, castUrl }
 }

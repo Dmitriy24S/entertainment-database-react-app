@@ -10,7 +10,9 @@ import React, {
 import useFetchData from '../hooks/useFetchData'
 import useLocalStorage from '../hooks/useLocalStorage'
 
-import { CombinedMediaType, MediaType, TBookmarksContext, TDataContext } from '../types'
+import { movieListUrl } from '../const/movieListUrl'
+import { tvListUrl } from '../const/tvListUrl'
+import { CombinedMediaType, TBookmarksContext, TDataContext } from '../types'
 
 const BookmarksContext = createContext({} as TBookmarksContext)
 const DataContext = createContext({} as TDataContext)
@@ -22,12 +24,15 @@ export const ContextProvider = ({ children }: { children: React.ReactNode }) => 
   const [bookmarkedItems, setBookmarkedItems] =
     useState<CombinedMediaType[]>(storedBookmarksValue)
 
-  const fetchedMovieData = useFetchData(MediaType.MOVIE, [])
-  const [dataPopularMovies, setDataPopularMovies] =
-    useState<CombinedMediaType[]>(fetchedMovieData)
+  const {
+    data: { results: fetchedMovieData },
+  } = useFetchData(movieListUrl, [])
+  const [dataPopularMovies, setDataPopularMovies] = useState<CombinedMediaType[]>([])
 
-  const fetchedTvData = useFetchData(MediaType.TV, [])
-  const [dataTrendingTv, setDataTrendingTv] = useState<CombinedMediaType[]>(fetchedTvData)
+  const {
+    data: { results: fetchedTvData },
+  } = useFetchData(tvListUrl, [])
+  const [dataTrendingTv, setDataTrendingTv] = useState<CombinedMediaType[]>([])
 
   useEffect(() => {
     setDataPopularMovies(fetchedMovieData)

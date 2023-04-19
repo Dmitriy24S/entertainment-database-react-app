@@ -14,6 +14,7 @@ interface RowProps {
   mediaType: MediaType
 }
 
+// const Row: React.FC<RowProps> = ({ data = [], mediaType }) => {
 const Row: React.FC<RowProps> = ({ data, mediaType }) => {
   const leftButtonRef = useRef<HTMLButtonElement>(null)
   const rightButtonRef = useRef<HTMLButtonElement>(null)
@@ -45,6 +46,7 @@ const Row: React.FC<RowProps> = ({ data, mediaType }) => {
   )
 
   return (
+    // TODO: add skeleton?
     <section className={sharedStyles.container}>
       <h1 className={sharedStyles.header}>
         {mediaType === MediaType.MOVIE ? 'Popular movies' : 'Trending shows'}
@@ -55,7 +57,7 @@ const Row: React.FC<RowProps> = ({ data, mediaType }) => {
         <RightSrollButton />
         {/* Inner Container */}
         <div className={styles.itemsInnerContainer} id='row'>
-          {data.map((mediaItem: CombinedMediaType) => {
+          {data?.map((mediaItem: CombinedMediaType) => {
             // Put "-"" instead space in movie title for url:
             const urlName = mediaItem[mediaApiTitle]
               .trim()
