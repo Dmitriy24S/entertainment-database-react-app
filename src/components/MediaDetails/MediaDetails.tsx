@@ -6,14 +6,14 @@ import MediaRatingCircularProgressBar from '../MediaRatingCircularProgressBar/Me
 import Spinner from '../Spinner/Spinner'
 
 import { apiCastProfileImgUrl } from '../../const/apiCastProfileImgUrl'
-import { useBookmarksContext } from '../../context/ContextProvider'
+import { useBookmarksContext, useHeaderContext } from '../../context/ContextProvider'
 import useMediaDetails from '../../hooks/useMediaDetails'
 import { getMovieDetailsApiUrl, getTVDetailsApiUrl } from '../../utils/getMediaApiUrl'
 import { extractMediaInfoFromURL } from '../../utils/getMediaInfoFromURL'
+import { getRuntime } from '../../utils/getRuntime'
 
 import { ActorInfoDataType, MediaType, MovieDetailsGenresType } from '../../types'
 
-import { getRuntime } from '../../utils/getRuntime'
 import styles from './MediaDetails.module.scss'
 
 const MediaDetails = () => {
@@ -21,6 +21,7 @@ const MediaDetails = () => {
   const location = useLocation()
   const { pathname } = location
 
+  const { activeMenu } = useHeaderContext()
   const { addToBookmarks, checkInBookmarksStatus } = useBookmarksContext()
 
   const { mediaType, mediaId } = extractMediaInfoFromURL(pathname)
@@ -44,15 +45,17 @@ const MediaDetails = () => {
   return (
     mediaData && (
       <section className={styles.container}>
-        <button
-          onClick={() => {
-            navigate(-1)
-          }}
-          title='Go back'
-          className={styles.returnButton}
-        >
-          <IoMdArrowBack />
-        </button>
+        {activeMenu && (
+          <button
+            onClick={() => {
+              navigate(-1)
+            }}
+            title='Go back'
+            className={styles.returnButton}
+          >
+            <IoMdArrowBack />
+          </button>
+        )}
         <div className={styles.detailsContainer}>
           {/* Media poster */}
           <img
