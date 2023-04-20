@@ -12,6 +12,18 @@ export interface TDataContext {
   setDataTrendingTv: React.Dispatch<React.SetStateAction<CombinedMediaType[]>>
 }
 
+export interface THeaderContext {
+  activeMenu: NavLinkTitleEnum | null
+  setActiveMenu: React.Dispatch<React.SetStateAction<NavLinkTitleEnum | null>>
+}
+
+export enum NavLinkTitleEnum {
+  HOME = 'home',
+  MOVIES = 'movies',
+  TV = 'tv shows',
+  BOOKMARKS = 'bookmarks',
+}
+
 // export type MediaType = {
 //   TV: 'tv'
 //   MOVIE: 'movie'

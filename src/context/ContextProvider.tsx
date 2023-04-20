@@ -12,37 +12,27 @@ import useLocalStorage from '../hooks/useLocalStorage'
 
 import { movieListUrl } from '../const/movieListUrl'
 import { tvListUrl } from '../const/tvListUrl'
-import { CombinedMediaType, TBookmarksContext, TDataContext } from '../types'
+import {
+  CombinedMediaType,
+  NavLinkTitleEnum,
+  TBookmarksContext,
+  TDataContext,
+  THeaderContext,
+} from '../types'
 
 const BookmarksContext = createContext({} as TBookmarksContext)
 const DataContext = createContext({} as TDataContext)
+const HeaderContext = createContext({} as THeaderContext)
 
 export const ContextProvider = ({ children }: { children: React.ReactNode }) => {
   console.count('ContextProvider')
 
+  // Bookmarks Context
   const storedBookmarksValue = useLocalStorage('bookmarks', [])
   const [bookmarkedItems, setBookmarkedItems] =
     useState<CombinedMediaType[]>(storedBookmarksValue)
 
-  const {
-    data: { results: fetchedMovieData },
-  } = useFetchData(movieListUrl, [])
-  const [dataPopularMovies, setDataPopularMovies] = useState<CombinedMediaType[]>([])
-
-  const {
-    data: { results: fetchedTvData },
-  } = useFetchData(tvListUrl, [])
-  const [dataTrendingTv, setDataTrendingTv] = useState<CombinedMediaType[]>([])
-
-  useEffect(() => {
-    setDataPopularMovies(fetchedMovieData)
-  }, [fetchedMovieData])
-
-  useEffect(() => {
-    setDataTrendingTv(fetchedTvData)
-  }, [fetchedTvData])
-
-  // Add item to bookmarks
+  // add item to bookmarks
   const addToBookmarks = useCallback(
     (obj: CombinedMediaType) => {
       // Check for matching item in bookmarks
@@ -60,7 +50,7 @@ export const ContextProvider = ({ children }: { children: React.ReactNode }) => 
     [bookmarkedItems]
   )
 
-  // Check if item already in bookmarks true/false
+  // check if item already in bookmarks true/false
   const checkInBookmarksStatus = useCallback(
     (obj: CombinedMediaType) => {
       return bookmarkedItems.some(
@@ -80,6 +70,25 @@ export const ContextProvider = ({ children }: { children: React.ReactNode }) => 
     [bookmarkedItems, setBookmarkedItems, addToBookmarks, checkInBookmarksStatus]
   )
 
+  // Data Context
+  const {
+    data: { results: fetchedMovieData },
+  } = useFetchData(movieListUrl, [])
+  const [dataPopularMovies, setDataPopularMovies] = useState<CombinedMediaType[]>([])
+
+  const {
+    data: { results: fetchedTvData },
+  } = useFetchData(tvListUrl, [])
+  const [dataTrendingTv, setDataTrendingTv] = useState<CombinedMediaType[]>([])
+
+  useEffect(() => {
+    setDataPopularMovies(fetchedMovieData)
+  }, [fetchedMovieData])
+
+  useEffect(() => {
+    setDataTrendingTv(fetchedTvData)
+  }, [fetchedTvData])
+
   const memoizedDataValues = useMemo(
     () => ({
       dataPopularMovies,
@@ -90,12 +99,26 @@ export const ContextProvider = ({ children }: { children: React.ReactNode }) => 
     [dataPopularMovies, setDataPopularMovies, dataTrendingTv, setDataTrendingTv]
   )
 
+  // Header Context
+  const [activeMenu, setActiveMenu] = useState<NavLinkTitleEnum | null>(null)
+
+  const memoizedHeaderValues = useMemo(
+    () => ({
+      activeMenu,
+      setActiveMenu,
+    }),
+    [activeMenu, setActiveMenu]
+  )
+
   return (
     <BookmarksContext.Provider value={memoizedBookmarksValues}>
-      <DataContext.Provider value={memoizedDataValues}>{children}</DataContext.Provider>
+      <HeaderContext.Provider value={memoizedHeaderValues}>
+        <DataContext.Provider value={memoizedDataValues}>{children}</DataContext.Provider>
+      </HeaderContext.Provider>
     </BookmarksContext.Provider>
   )
 }
 
 export const useBookmarksContext = () => useContext(BookmarksContext)
 export const useDataContext = () => useContext(DataContext)
+export const useHeaderContext = () => useContext(HeaderContext)

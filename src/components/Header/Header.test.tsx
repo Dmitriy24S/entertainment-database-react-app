@@ -1,13 +1,16 @@
 import { render, screen } from '@testing-library/react'
 import { MemoryRouter } from 'react-router-dom'
+import { MockAppContextProvider } from '../../mocks/mockContext'
 import Header from './Header'
 
 describe('Header', () => {
   it('should render Home and TV link with correct URL', () => {
     render(
-      <MemoryRouter>
-        <Header />
-      </MemoryRouter>
+      <MockAppContextProvider>
+        <MemoryRouter>
+          <Header />
+        </MemoryRouter>
+      </MockAppContextProvider>
     )
 
     // const tvLink = screen.getByLabelText('Tv Shows')
