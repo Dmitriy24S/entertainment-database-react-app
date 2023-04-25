@@ -32,22 +32,20 @@ const Header = () => {
   return (
     <header className='App-header'>
       <div className='header-container'>
-        <div className='header-inner'>
-          <div className='header-content'>
-            <Link to={'/'} onClick={() => setActiveMenu(NavLinkTitleEnum.HOME)}>
-              <img src={Logo} alt='' />
-            </Link>
-            <ul className='nav-menu'>
-              {navLinks.map((link) => (
-                <li key={link.title}>
-                  <NavLinkItem title={link.title}>
-                    <img src={link.icon} alt='' />
-                  </NavLinkItem>
-                </li>
-              ))}
-            </ul>
-            <img src={ProfileIcon} alt='' className='user-profile-icon' />
-          </div>
+        <div className='header-content'>
+          <Link to={'/'} onClick={() => setActiveMenu(NavLinkTitleEnum.HOME)}>
+            <img src={Logo} alt='' />
+          </Link>
+          <ul className='nav-menu'>
+            {navLinks.map((link) => (
+              <li key={link.title}>
+                <NavLinkItem title={link.title}>
+                  <img src={link.icon} alt='' />
+                </NavLinkItem>
+              </li>
+            ))}
+          </ul>
+          <img src={ProfileIcon} alt='' className='user-profile-icon' />
         </div>
       </div>
     </header>
