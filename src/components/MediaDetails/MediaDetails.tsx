@@ -1,29 +1,28 @@
-import { IoMdArrowBack } from 'react-icons/io'
-import { useLocation, useNavigate } from 'react-router-dom'
+import { useLocation } from 'react-router-dom'
 
 import Bookmark from '../Bookmark/Bookmark'
-import MediaRatingCircularProgressBar from '../MediaRatingCircularProgressBar/MediaRatingCircularProgressBar'
 import Spinner from '../Spinner/Spinner'
+import KeywordsList from './KeywordsList/KeywordsList'
 
-import { apiCastProfileImgUrl } from '../../const/apiCastProfileImgUrl'
 import { useBookmarksContext, useHeaderContext } from '../../context/ContextProvider'
 import useMediaDetails from '../../hooks/useMediaDetails'
 import { getMovieDetailsApiUrl, getTVDetailsApiUrl } from '../../utils/getMediaApiUrl'
 import { extractMediaInfoFromURL } from '../../utils/getMediaInfoFromURL'
-import { getRuntime } from '../../utils/getRuntime'
 
-import { ActorInfoDataType, MediaType, MovieDetailsGenresType } from '../../types'
+import { MediaType } from '../../types'
 
+import BackButton from './BackButton/BackButton'
+import Cast from './Cast/Cast'
 import styles from './MediaDetails.module.scss'
+import Overview from './Overview/Overview'
+import QuickInfo from './QuickInfo/QuickInfo'
+import Score from './Score/Score'
+import Title from './Title/Title'
 
 const MediaDetails = () => {
-  const navigate = useNavigate()
-  const location = useLocation()
-  const { pathname } = location
-
+  const { pathname } = useLocation()
   const { activeMenu } = useHeaderContext()
   const { addToBookmarks, checkInBookmarksStatus } = useBookmarksContext()
-
   const { mediaType, mediaId } = extractMediaInfoFromURL(pathname)
 
   const requestUrl =
@@ -31,7 +30,7 @@ const MediaDetails = () => {
       ? getMovieDetailsApiUrl(mediaId)
       : getTVDetailsApiUrl(mediaId)
 
-  const { mediaData, castData, userScore, movieYear, releaseDate } = useMediaDetails(
+  const { mediaData, castData, userScore, mediaYear, releaseDate } = useMediaDetails(
     requestUrl,
     mediaType
   )
@@ -45,17 +44,7 @@ const MediaDetails = () => {
   return (
     mediaData && (
       <section className={styles.container}>
-        {activeMenu && (
-          <button
-            onClick={() => {
-              navigate(-1)
-            }}
-            title='Go back'
-            className={styles.returnButton}
-          >
-            <IoMdArrowBack />
-          </button>
-        )}
+        {activeMenu && <BackButton />}
         <div className={styles.detailsContainer}>
           {/* Media poster */}
           <img
@@ -69,83 +58,30 @@ const MediaDetails = () => {
           />
           {/* Media info */}
           <div className={styles.details}>
-            <h1 className={styles.title}>
-              {mediaType === MediaType.MOVIE
-                ? mediaData.original_title
-                : mediaData.original_name}
-              <span className={styles.year}>{` (${movieYear && movieYear[0]})`}</span>
-            </h1>
-            <ul className={styles.shortList}>
-              <li>{releaseDate}</li>
-              <li className={styles.genres}>
-                <span>
-                  {mediaData.genres.map((genre: MovieDetailsGenresType, index: number) =>
-                    index !== mediaData.genres.length - 1 ? genre.name + ', ' : genre.name
-                  )}
-                </span>
-              </li>
-              <li className={styles.runtime}>
-                {mediaType === MediaType.MOVIE
-                  ? getRuntime(mediaData.runtime)
-                  : `${mediaData.last_episode_to_air.runtime}min`}
-                {/* : `${mediaData.episode_run_time[0]}min`} */}
-              </li>
-            </ul>
+            <Title mediaType={mediaType} mediaData={mediaData} mediaYear={mediaYear} />
+            <QuickInfo
+              mediaType={mediaType}
+              mediaData={mediaData}
+              releaseDate={releaseDate}
+            />
             <div className={styles.interactiveContainer}>
-              <div className={styles.userRating}>
-                {/* Media user score rating circle */}
-                <div className={styles.ratingCircleContainer}>
-                  <MediaRatingCircularProgressBar userScore={userScore} />
-                </div>
-                <h5 className={styles.userRatingTitle}>
-                  User <br /> Score
-                </h5>
-                <Bookmark
-                  title={
-                    checkInBookmarksStatus(mediaData) ? 'Remove bookmark' : 'Add bookmark'
-                  }
-                  isBookmarked={checkInBookmarksStatus(mediaData)}
-                  handleClick={() => addToBookmarks(mediaData)}
-                  fullPage
-                />
-              </div>
+              <Score userScore={userScore} />
+              <Bookmark
+                title={
+                  checkInBookmarksStatus(mediaData) ? 'Remove bookmark' : 'Add bookmark'
+                }
+                isBookmarked={checkInBookmarksStatus(mediaData)}
+                handleClick={() => addToBookmarks(mediaData)}
+                fullPage
+              />
             </div>
             <p className={styles.tagline}>{mediaData.tagline}</p>
-            <div className={styles.overview}>
-              <h5 className={styles.overviewTitle}>Overview</h5>
-              <p className={styles.overviewDescription}>{mediaData.overview}</p>
-            </div>
+            <Overview mediaData={mediaData} />
+            <KeywordsList mediaType={mediaType} mediaId={mediaId} />
           </div>
         </div>
         {/* Media cast */}
-        <section className={styles.castContainer}>
-          <h3 className={styles.castTitle}>The Cast</h3>
-          <div className={styles.cast}>
-            {castData?.cast.map((person: ActorInfoDataType, index: number) => {
-              if (index < 8) {
-                return (
-                  <div className={styles.castCard} key={person.id}>
-                    <img src={`${apiCastProfileImgUrl}${person.profile_path}`} alt='' />
-                    <div className={styles.roleContainer}>
-                      <h4 className={styles.actorName}>{person.name}</h4>
-                      <p className={styles.characterName}>
-                        {mediaType === MediaType.MOVIE
-                          ? person.character
-                          : person?.roles?.map((role, index) =>
-                              index !== person.roles.length - 1
-                                ? role.character + ', '
-                                : role.character
-                            )}
-                      </p>
-                    </div>
-                  </div>
-                )
-              } else {
-                return null
-              }
-            })}
-          </div>
-        </section>
+        <Cast castData={castData?.cast} mediaType={mediaType} />
       </section>
     )
   )

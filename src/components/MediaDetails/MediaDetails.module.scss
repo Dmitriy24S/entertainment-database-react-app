@@ -5,24 +5,6 @@
   max-width: 82rem;
 }
 
-.returnButton {
-  color: white;
-  display: flex;
-  position: relative;
-  left: -1rem;
-  width: min-content;
-  padding: 0.5rem;
-  margin-bottom: 1rem;
-  opacity: 0.9;
-  transition: opacity 150ms ease-in-out;
-  svg {
-    font-size: 2rem;
-  }
-  &:hover {
-    opacity: 1;
-  }
-}
-
 .detailsContainer {
   display: flex;
   flex-direction: column;
@@ -39,6 +21,7 @@
   max-width: 23rem;
   width: 100%;
   margin: 0 auto;
+  border-radius: 8px;
   @media (min-width: 640px) {
     margin: 0;
   }
@@ -52,72 +35,10 @@
   max-width: 31rem;
 }
 
-.title {
-  font-size: 1.4rem;
-  font-weight: 500;
-}
-
-.year {
-  color: hsl(0, 0%, 80%);
-}
-
-.shortList {
-  display: flex;
-  gap: 1rem;
-  font-size: 0.9rem;
-  color: hsl(0, 0%, 80%);
-  flex-wrap: wrap;
-  li {
-    display: flex;
-  }
-  .genres {
-    display: block;
-    max-width: 206px;
-    margin-left: 1.5rem;
-  }
-  .runtime {
-    margin-left: 1.5rem;
-  }
-}
-
-// short list - dot separator
-.shortList li::before {
-  content: '\2022'; /* Add content: \2022 is the CSS Code/unicode for a bullet */
-  color: white; /* Change the color */
-  font-weight: bold; /* If you want it to be bold */
-  display: inline-block; /* Needed to add space between the bullet and the text */
-  width: 1em; /* Also needed for space (tweak if needed) */
-  margin-left: -1em; /* Also needed for space (tweak if needed) */
-}
-.shortList li:first-child::before {
-  content: none;
-}
-
 .interactiveContainer {
   margin-top: 1rem;
-}
-
-.userRating {
   display: flex;
   align-items: center;
-  gap: 0.7rem;
-
-  .userRatingTitle {
-    font-weight: 500;
-    font-size: 1rem;
-  }
-}
-
-.ratingCircleContainer {
-  width: 80px;
-  display: flex;
-  align-items: center;
-  // .CircularProgressbar-text { // ! ? with module scss broken?
-  text {
-    font-weight: 700;
-    dominant-baseline: middle;
-    text-anchor: middle;
-  }
 }
 
 .tagline {
@@ -125,67 +46,4 @@
   font-size: 0.9rem;
   font-style: italic;
   opacity: 80%;
-}
-
-.overview {
-  margin-top: 0.5rem;
-
-  .overviewTitle {
-    font-size: 1.3rem;
-    margin-bottom: 0.5rem;
-  }
-
-  .overviewDescription {
-    font-size: 0.9rem;
-  }
-}
-
-.castContainer {
-  margin-top: 2rem;
-
-  .castTitle {
-    font-size: 1.3rem;
-    font-size: 500;
-  }
-
-  .cast {
-    margin-top: 1rem;
-    display: flex;
-    gap: 1.3rem;
-    // overflow-x: scroll;
-    overflow-x: auto; // hide when not needed
-    scroll-snap-type: x mandatory; // scroll snap part 1
-    overscroll-behavior-inline: contain; // prevent browser forwards/backwards swipe action when swiping inside list
-  }
-}
-
-.castCard {
-  scroll-snap-align: start; // scroll snap part 2
-  margin-bottom: 1rem;
-  min-width: 8rem;
-  min-height: 294px; // no image placement spacing for card?
-  max-width: 128px; // limit img size if only 1 cast in list // ? refactor css ?
-  display: flex;
-  flex-direction: column;
-  overflow: hidden;
-  background-color: rgb(25 33 52);
-  border-radius: 10px;
-
-  img {
-    // min-height: 162px; // if no image placeholder - content card spacing fix
-    height: 162px; // safari img is stretched with min-height - set hard code height to fix?
-  }
-
-  .roleContainer {
-    padding: 0.7rem;
-  }
-
-  .actorName {
-    font-size: 1rem;
-  }
-
-  .characterName {
-    margin-top: 0.5rem;
-    font-size: 1rem;
-  }
 }

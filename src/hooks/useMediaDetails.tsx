@@ -14,26 +14,26 @@ const useMediaDetails = (requestUrl: RequestUrlType, mediaType: MediaType) => {
 
   const userScore = mediaData ? getUserScore(mediaData) : 0
 
-  let movieYear
+  let mediaYear
   if (mediaData) {
     if (mediaType === MediaType.MOVIE) {
-      movieYear = mediaData.release_date.split('-') // ['2022', '03', '30']
+      mediaYear = mediaData.release_date.split('-') // ['2022', '03', '30']
     }
     if (mediaType === MediaType.TV) {
-      movieYear = mediaData.first_air_date.split('-') // ['2022', '06', '08']
+      mediaYear = mediaData.first_air_date.split('-') // ['2022', '06', '08']
     }
   }
 
   let releaseDate
-  if (movieYear) {
-    releaseDate = `${movieYear[1]}/${movieYear[2]}/${movieYear[0]}` // 2022/03/30
+  if (mediaYear) {
+    releaseDate = `${mediaYear[1]}/${mediaYear[2]}/${mediaYear[0]}` // 2022/03/30
   }
 
-  return { mediaData, castData, userScore, movieYear, releaseDate } as {
+  return { mediaData, castData, userScore, mediaYear, releaseDate } as {
     mediaData: CombinedMediaType
     castData: CastDataType
     userScore: number
-    movieYear: string
+    mediaYear: string
     releaseDate: string
   }
 }

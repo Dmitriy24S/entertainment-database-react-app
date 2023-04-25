@@ -1,0 +1,36 @@
+.container {
+  //   margin-top: 1.7rem;
+  margin-top: 1rem;
+}
+
+.title {
+  font-size: 1.3rem;
+  margin-bottom: 0.75rem;
+}
+
+.list {
+  display: flex;
+  gap: 1rem;
+  font-size: 0.8rem;
+  //   margin-top: 2rem;
+  //   margin-top: 1.7rem;
+  //   overflow-x: auto;
+  //   overscroll-behavior: contain;
+  //   padding-bottom: 10px;
+  flex-wrap: wrap;
+
+  li {
+    background-color: hsl(224deg, 38%, 23%);
+    padding: 5px 7px;
+    // min-width: 100%;
+    // width: fit-content;
+    border-radius: 4px;
+    white-space: nowrap;
+    cursor: pointer;
+    transition: background-color 150ms ease-out;
+    &:hover {
+      background-color: hsl(224deg, 39%, 28%);
+      // TODO: custom colors VARS
+    }
+  }
+}

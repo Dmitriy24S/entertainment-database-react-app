@@ -1,0 +1,49 @@
+.castContainer {
+  margin-top: 2rem;
+
+  .castTitle {
+    font-size: 1.3rem;
+    font-size: 500;
+  }
+
+  .cast {
+    margin-top: 1rem;
+    display: flex;
+    gap: 1.3rem;
+    // overflow-x: scroll;
+    overflow-x: auto; // hide when not needed
+    scroll-snap-type: x mandatory; // scroll snap part 1
+    overscroll-behavior-inline: contain; // prevent browser forwards/backwards swipe action when swiping inside list
+  }
+}
+
+.castCard {
+  scroll-snap-align: start; // scroll snap part 2
+  margin-bottom: 1rem;
+  min-width: 8rem;
+  min-height: 294px; // no image placement spacing for card?
+  max-width: 128px; // limit img size if only 1 cast in list // ? refactor css ?
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  background-color: rgb(25 33 52);
+  border-radius: 10px;
+
+  img {
+    // min-height: 162px; // if no image placeholder - content card spacing fix
+    height: 162px; // safari img is stretched with min-height - set hard code height to fix?
+  }
+
+  .roleContainer {
+    padding: 0.7rem;
+  }
+
+  .actorName {
+    font-size: 1rem;
+  }
+
+  .characterName {
+    margin-top: 0.5rem;
+    font-size: 1rem;
+  }
+}

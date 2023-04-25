@@ -14,36 +14,12 @@ interface RowProps {
   mediaType: MediaType
 }
 
-// const Row: React.FC<RowProps> = ({ data = [], mediaType }) => {
 const Row: React.FC<RowProps> = ({ data, mediaType }) => {
   const leftButtonRef = useRef<HTMLButtonElement>(null)
   const rightButtonRef = useRef<HTMLButtonElement>(null)
   const containerRef = useHorizontalScroll(leftButtonRef, rightButtonRef)
 
   const mediaApiTitle = mediaType === MediaType.MOVIE ? 'title' : 'name'
-
-  const LeftSrollButton = () => (
-    <button
-      type='button'
-      ref={leftButtonRef}
-      aria-label='Move list to the left'
-      className={[styles.rowButton, 'left-button'].join(' ')}
-    >
-      <AiOutlineArrowLeft />
-    </button>
-  )
-
-  const RightSrollButton = () => (
-    <button
-      type='button'
-      ref={rightButtonRef}
-      aria-label='Move list to the right'
-      // className={[styles.rowButton, 'right-button'].join(' ')}
-      className={[styles.rowButton, styles.rightButton].join(' ')}
-    >
-      <AiOutlineArrowRight />
-    </button>
-  )
 
   return (
     // TODO: add skeleton?
@@ -53,8 +29,8 @@ const Row: React.FC<RowProps> = ({ data, mediaType }) => {
       </h1>
       {/* Outer Container */}
       <div className={styles.itemsOuterContainer} ref={containerRef}>
-        <LeftSrollButton />
-        <RightSrollButton />
+        <LeftSrollButton leftButtonRef={leftButtonRef} />
+        <RightSrollButton rightButtonRef={rightButtonRef} />
         {/* Inner Container */}
         <div className={styles.itemsInnerContainer} id='row'>
           {data?.map((mediaItem: CombinedMediaType) => {
@@ -83,3 +59,34 @@ const Row: React.FC<RowProps> = ({ data, mediaType }) => {
 }
 
 export default Row
+
+const LeftSrollButton = ({
+  leftButtonRef,
+}: {
+  leftButtonRef: React.RefObject<HTMLButtonElement>
+}) => (
+  <button
+    type='button'
+    ref={leftButtonRef}
+    aria-label='Move list to the left'
+    className={[styles.rowButton, 'left-button'].join(' ')}
+  >
+    <AiOutlineArrowLeft />
+  </button>
+)
+
+const RightSrollButton = ({
+  rightButtonRef,
+}: {
+  rightButtonRef: React.RefObject<HTMLButtonElement>
+}) => (
+  <button
+    type='button'
+    ref={rightButtonRef}
+    aria-label='Move list to the right'
+    // className={[styles.rowButton, 'right-button'].join(' ')}
+    className={[styles.rowButton, styles.rightButton].join(' ')}
+  >
+    <AiOutlineArrowRight />
+  </button>
+)

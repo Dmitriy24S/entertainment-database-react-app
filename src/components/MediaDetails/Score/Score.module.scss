@@ -1,0 +1,22 @@
+.userRating {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+
+  .userRatingTitle {
+    font-weight: 500;
+    font-size: 1rem;
+  }
+}
+
+.ratingCircleContainer {
+  width: 80px;
+  display: flex;
+  align-items: center;
+  // .CircularProgressbar-text { // ! ? with module scss broken?
+  text {
+    font-weight: 700;
+    dominant-baseline: middle;
+    text-anchor: middle;
+  }
+}
