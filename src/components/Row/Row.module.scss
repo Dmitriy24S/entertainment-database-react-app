@@ -26,6 +26,7 @@
 }
 
 .itemsInnerContainer {
+  min-height: 160px; // TODO: spacing size when no cards / loading? skeleton?
   gap: 1.2rem;
   margin-top: 1rem;
   overflow-y: hidden;
