@@ -26,6 +26,7 @@ const MediaCard = ({ mediaItem, urlName, title, mediaType }: MediaCardProps) => 
       <img
         src={`https://www.themoviedb.org/t/p/w440_and_h660_face${mediaItem.poster_path}`}
         alt={`${title} poster`}
+        loading='lazy'
         className={styles.poster}
       />
       <Link

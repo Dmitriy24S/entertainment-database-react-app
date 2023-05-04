@@ -35,6 +35,7 @@ const MediaCardLarge: React.FC<MediaCardLargeProps> = ({
       <img
         src={`https://www.themoviedb.org/t/p/w440_and_h660_face${item.poster_path}`}
         alt={mediaTitle}
+        loading='lazy'
         className={styles.mediaCardPoster}
       />
       <div className={styles.mediaInfo}>

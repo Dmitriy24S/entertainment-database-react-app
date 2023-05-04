@@ -19,7 +19,11 @@ const Cast: React.FC<CastProps> = ({ castData, mediaType }) => {
         {/* show only first 8 cast members */}
         {castData?.slice(0, 8).map((person: ActorInfoDataType, index: number) => (
           <div className={styles.castCard} key={person.id}>
-            <img src={`${apiCastProfileImgUrl}${person.profile_path}`} alt='' />
+            <img
+              src={`${apiCastProfileImgUrl}${person.profile_path}`}
+              alt={person.name}
+              loading='lazy'
+            />
             <div className={styles.roleContainer}>
               <h4 className={styles.actorName}>{person.name}</h4>
               <p className={styles.characterName}>
