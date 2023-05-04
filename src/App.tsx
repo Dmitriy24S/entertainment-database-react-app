@@ -1,15 +1,33 @@
 import { createTheme, ThemeProvider } from '@mui/material/styles'
-import React from 'react'
+import React, { Suspense } from 'react'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 
-import Header from './components/Header/Header'
-import BookmarksListPage from './pages/BookmarksListPage/BookmarksListPage'
-import Main from './pages/Main/Main'
-import MediaDetailsPage from './pages/MediaDetailsPage/MediaDetailsPage'
-import MovieListPage from './pages/MovieListPage/MovieListPage'
-import TvShowListPage from './pages/TvShowListPage/TvShowLIstPage'
-
 import './App.scss'
+import Header from './components/Header/Header'
+
+const Main = React.lazy(() => import(/* webpackChunkName: "Main" */ './pages/Main/Main'))
+const MovieListPage = React.lazy(
+  () =>
+    import(/* webpackChunkName: "MovieListPage" */ './pages/MovieListPage/MovieListPage')
+)
+const TvShowListPage = React.lazy(
+  () =>
+    import(
+      /* webpackChunkName: "TvShowListPage" */ './pages/TvShowListPage/TvShowLIstPage'
+    )
+)
+const BookmarksListPage = React.lazy(
+  () =>
+    import(
+      /* webpackChunkName: "BookmarksListPage" */ './pages/BookmarksListPage/BookmarksListPage'
+    )
+)
+const MediaDetailsPage = React.lazy(
+  () =>
+    import(
+      /* webpackChunkName: "MediaDetailsPage" */ './pages/MediaDetailsPage/MediaDetailsPage'
+    )
+)
 
 const darkTheme = createTheme({
   palette: {
@@ -26,11 +44,46 @@ function App() {
           <main className='App-main'>
             <Routes>
               <Route path='' element={<Main />} />
-              <Route path='/movie/:id' element={<MediaDetailsPage />} />
-              <Route path='/tv/:id' element={<MediaDetailsPage />} />
-              <Route path='/movies' element={<MovieListPage />} />
-              <Route path='/tv' element={<TvShowListPage />} />
-              <Route path='/bookmarks' element={<BookmarksListPage />} />
+              <Route
+                path='/movie/:id'
+                element={
+                  <Suspense>
+                    <MediaDetailsPage />
+                  </Suspense>
+                }
+              />
+              <Route
+                path='/tv/:id'
+                element={
+                  <Suspense>
+                    <MediaDetailsPage />
+                  </Suspense>
+                }
+              />
+              <Route
+                path='/movies'
+                element={
+                  <Suspense>
+                    <MovieListPage />
+                  </Suspense>
+                }
+              />
+              <Route
+                path='/tv'
+                element={
+                  <Suspense>
+                    <TvShowListPage />
+                  </Suspense>
+                }
+              />
+              <Route
+                path='/bookmarks'
+                element={
+                  <Suspense>
+                    <BookmarksListPage />
+                  </Suspense>
+                }
+              />
             </Routes>
           </main>
         </BrowserRouter>
