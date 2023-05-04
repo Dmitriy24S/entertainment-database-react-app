@@ -28,7 +28,7 @@ export const ContextProvider = ({ children }: { children: React.ReactNode }) => 
   console.count('ContextProvider')
 
   // Bookmarks Context
-  const storedBookmarksValue = useLocalStorage('bookmarks', [])
+  const storedBookmarksValue = useLocalStorage('bookmarks', []) // get local storage bookmarks
   const [bookmarkedItems, setBookmarkedItems] =
     useState<CombinedMediaType[]>(storedBookmarksValue)
 
@@ -59,6 +59,14 @@ export const ContextProvider = ({ children }: { children: React.ReactNode }) => 
     },
     [bookmarkedItems]
   )
+
+  // Update localStorage, add bookmark to localStorage
+  useEffect(() => {
+    // prevent clearing local storage on load
+    if (bookmarkedItems.length > 0) {
+      localStorage.setItem('bookmarks', JSON.stringify(bookmarkedItems))
+    }
+  }, [bookmarkedItems])
 
   const memoizedBookmarksValues = useMemo(
     () => ({
