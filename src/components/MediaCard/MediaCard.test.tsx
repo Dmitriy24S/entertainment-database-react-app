@@ -8,7 +8,6 @@ import MediaCard from './MediaCard'
 
 describe('MediaCard', () => {
   it('should render link with the correct URL', () => {
-    const title = 'title'
     const urlName = 'urlName'
 
     render(
@@ -16,8 +15,6 @@ describe('MediaCard', () => {
         <MemoryRouter>
           <MediaCard
             mediaItem={mockMediaItemData}
-            urlName={urlName}
-            title={title}
             mediaType={MediaType.MOVIE} // media='movie'
           />
         </MemoryRouter>

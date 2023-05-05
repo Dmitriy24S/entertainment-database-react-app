@@ -1,28 +1,22 @@
 .itemsOuterContainer {
   position: relative;
-}
 
-.rowButton {
-  position: absolute;
-  z-index: 20;
-  left: 1rem;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 30px;
-  height: 30px;
-  border-radius: 9999px;
-  background-color: white;
-  opacity: 60%;
-  transition: opacity 150ms ease-out;
-  &:hover,
-  &:focus-visible {
-    opacity: 90%;
+  &:after {
+    content: '';
+    width: 40px;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    right: 0;
+    background-image: linear-gradient(to right, rgba(255, 255, 255, 0) 0%, #10141e 100%);
+    pointer-events: none;
+    opacity: 0;
+    transition: linear 0.3s;
+
+    &.fade {
+      opacity: 1;
+    }
   }
-}
-
-.rightButton {
-  left: auto;
-  right: 1rem; // ! 'right' changes to this property will trigger: 'Paint', which can impact performance.webhintdetect-css-reflows/paint
 }
 
 .itemsInnerContainer {
@@ -42,7 +36,32 @@
   @media (min-width: 920px) {
     grid-auto-columns: 13%;
   }
-  // @media (min-width: 1120px) {
-  // grid-auto-columns: 18%;
-  // }
+}
+
+.fade {
+  position: relative;
+}
+.fade:after {
+  content: '';
+  width: 40px;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  right: 0;
+  background-image: linear-gradient(to right, rgba(255, 255, 255, 0) 0%, #10141e 100%);
+  pointer-events: none;
+
+  opacity: 1;
+  transition: linear 0.3s;
+
+  animation: fadeInOut 0.3ms ease-in-out;
+}
+
+@keyframes FadeInOut {
+  0% {
+    opacity: 0%;
+  }
+  to {
+    opacity: 100%;
+  }
 }

@@ -1,20 +1,27 @@
 import { Link } from 'react-router-dom'
 
 import { useBookmarksContext } from '../../context/ContextProvider'
-import { CombinedMediaType } from '../../types'
 import Bookmark from '../Bookmark/Bookmark'
+
+import { CombinedMediaType, MediaType } from '../../types'
 
 import styles from './MediaCard.module.scss'
 
 interface MediaCardProps {
   mediaItem: CombinedMediaType
-  urlName: string
-  title: string
   mediaType: string
 }
 
-const MediaCard = ({ mediaItem, urlName, title, mediaType }: MediaCardProps) => {
+const MediaCard = ({ mediaItem, mediaType }: MediaCardProps) => {
   const { addToBookmarks, checkInBookmarksStatus } = useBookmarksContext()
+  const mediaApiTitle = mediaType === MediaType.MOVIE ? 'title' : 'name'
+
+  // Put "-"" instead space in movie title for url:
+  const urlName = mediaItem[mediaApiTitle]
+    .trim()
+    .toLowerCase()
+    .replace(/\s+/g, '-')
+    .replace(/[^a-z0-9-]/gi, '')
 
   return (
     <article className={styles.mediaCard}>
@@ -25,7 +32,7 @@ const MediaCard = ({ mediaItem, urlName, title, mediaType }: MediaCardProps) => 
       />
       <img
         src={`https://www.themoviedb.org/t/p/w440_and_h660_face${mediaItem.poster_path}`}
-        alt={`${title} poster`}
+        alt={`${mediaApiTitle} poster`}
         loading='lazy'
         className={styles.poster}
       />
@@ -34,7 +41,7 @@ const MediaCard = ({ mediaItem, urlName, title, mediaType }: MediaCardProps) => 
         state={[mediaItem.id, mediaType]}
         className={styles.cardtitle}
       >
-        {title}
+        {mediaItem[mediaApiTitle]}
       </Link>
     </article>
   )

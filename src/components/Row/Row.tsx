@@ -1,8 +1,8 @@
-import React, { useRef } from 'react'
-import { AiOutlineArrowLeft, AiOutlineArrowRight } from 'react-icons/ai'
+import React, { useEffect, useRef, useState } from 'react'
 
 import useHorizontalScroll from '../../hooks/useHorizontalScroll'
-import MediaCard from '../MediaCard/MediaCard'
+import LeftScrollButton from './RowScrollButtons/LeftScrollButton'
+import RightSrollButton from './RowScrollButtons/RightScrollButton'
 
 import { CombinedMediaType, MediaType } from '../../types'
 
@@ -12,14 +12,35 @@ import styles from './Row.module.scss'
 interface RowProps {
   data: CombinedMediaType[]
   mediaType: MediaType
+  children: React.ReactNode
 }
 
-const Row: React.FC<RowProps> = ({ data, mediaType }) => {
+const Row: React.FC<RowProps> = ({ data, mediaType, children }) => {
   const leftButtonRef = useRef<HTMLButtonElement>(null)
   const rightButtonRef = useRef<HTMLButtonElement>(null)
   const containerRef = useHorizontalScroll(leftButtonRef, rightButtonRef)
+  const rowRef = useRef<HTMLDivElement>(null)
 
-  const mediaApiTitle = mediaType === MediaType.MOVIE ? 'title' : 'name'
+  const [showFade, setShowFade] = useState(true)
+
+  useEffect(() => {
+    const rowRefCurrent = rowRef.current
+    if (rowRefCurrent === null) return
+
+    console.log('listContainer.scrollLeft', rowRefCurrent.scrollLeft)
+
+    const handleFade = () => {
+      if (rowRefCurrent.scrollLeft === 0) {
+        setShowFade(true)
+      } else {
+        setShowFade(false)
+      }
+    }
+
+    rowRefCurrent.addEventListener('scroll', handleFade)
+
+    return () => rowRefCurrent.removeEventListener('scroll', handleFade)
+  }, [rowRef])
 
   return (
     // TODO: add skeleton?
@@ -28,30 +49,16 @@ const Row: React.FC<RowProps> = ({ data, mediaType }) => {
         {mediaType === MediaType.MOVIE ? 'Popular movies' : 'Trending shows'}
       </h1>
       {/* Outer Container */}
-      <div className={styles.itemsOuterContainer} ref={containerRef}>
-        <LeftSrollButton leftButtonRef={leftButtonRef} />
+      <div
+        ref={containerRef}
+        className={[styles.itemsOuterContainer, showFade ? styles.fade : ''].join(' ')}
+      >
+        <LeftScrollButton leftButtonRef={leftButtonRef} />
         <RightSrollButton rightButtonRef={rightButtonRef} />
-        {/* Inner Container */}
-        <div className={styles.itemsInnerContainer} id='row'>
-          {data?.map((mediaItem: CombinedMediaType) => {
-            // Put "-"" instead space in movie title for url:
-            const urlName = mediaItem[mediaApiTitle]
-              .trim()
-              .toLowerCase()
-              .replace(/\s+/g, '-')
-              .replace(/[^a-z0-9-]/gi, '')
 
-            return (
-              <MediaCard
-                mediaItem={mediaItem}
-                urlName={urlName}
-                // title={mediaItem.title}
-                title={mediaItem[mediaApiTitle]}
-                mediaType={mediaType}
-                key={mediaItem.id}
-              />
-            )
-          })}
+        {/* Inner Container */}
+        <div ref={rowRef} id='row' className={styles.itemsInnerContainer}>
+          {children}
         </div>
       </div>
     </section>
@@ -59,34 +66,3 @@ const Row: React.FC<RowProps> = ({ data, mediaType }) => {
 }
 
 export default Row
-
-const LeftSrollButton = ({
-  leftButtonRef,
-}: {
-  leftButtonRef: React.RefObject<HTMLButtonElement>
-}) => (
-  <button
-    type='button'
-    ref={leftButtonRef}
-    aria-label='Move list to the left'
-    className={[styles.rowButton, 'left-button'].join(' ')}
-  >
-    <AiOutlineArrowLeft />
-  </button>
-)
-
-const RightSrollButton = ({
-  rightButtonRef,
-}: {
-  rightButtonRef: React.RefObject<HTMLButtonElement>
-}) => (
-  <button
-    type='button'
-    ref={rightButtonRef}
-    aria-label='Move list to the right'
-    // className={[styles.rowButton, 'right-button'].join(' ')}
-    className={[styles.rowButton, styles.rightButton].join(' ')}
-  >
-    <AiOutlineArrowRight />
-  </button>
-)
