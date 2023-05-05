@@ -43,7 +43,14 @@ function App() {
           <Header />
           <main className='App-main'>
             <Routes>
-              <Route path='' element={<Main />} />
+              <Route
+                path=''
+                element={
+                  <Suspense>
+                    <Main />
+                  </Suspense>
+                }
+              />
               <Route
                 path='/movie/:id'
                 element={
