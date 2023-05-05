@@ -1,23 +1,27 @@
+import { useState } from 'react'
 import { useLocation } from 'react-router-dom'
 
 import Bookmark from '../Bookmark/Bookmark'
 import Spinner from '../Spinner/Spinner'
+import BackButton from './BackButton/BackButton'
+import Cast from './Cast/Cast'
 import KeywordsList from './KeywordsList/KeywordsList'
+import Overview from './Overview/Overview'
+import PlayTrailerButton from './PlayTrailerButton/PlayTrailerButton'
+import QuickInfo from './QuickInfo/QuickInfo'
+import Score from './Score/Score'
+import Title from './Title/Title'
+import TrailerVideo from './TrailerVideo/TrailerVideo'
 
 import { useBookmarksContext, useHeaderContext } from '../../context/ContextProvider'
+import { useFetchTrailer } from '../../hooks/useFetchTrailer'
 import useMediaDetails from '../../hooks/useMediaDetails'
 import { getMovieDetailsApiUrl, getTVDetailsApiUrl } from '../../utils/getMediaApiUrl'
 import { extractMediaInfoFromURL } from '../../utils/getMediaInfoFromURL'
 
 import { MediaType } from '../../types'
 
-import BackButton from './BackButton/BackButton'
-import Cast from './Cast/Cast'
 import styles from './MediaDetails.module.scss'
-import Overview from './Overview/Overview'
-import QuickInfo from './QuickInfo/QuickInfo'
-import Score from './Score/Score'
-import Title from './Title/Title'
 
 const MediaDetails = () => {
   const { pathname } = useLocation()
@@ -34,6 +38,13 @@ const MediaDetails = () => {
     requestUrl,
     mediaType
   )
+
+  const { videoUrl: mediaTrailerUrl } = useFetchTrailer(mediaType, mediaId)
+  const [showVideo, setShowVideo] = useState(false)
+
+  const toggleShowVideo = () => {
+    setShowVideo((prev) => !prev)
+  }
 
   if (!mediaData) {
     console.log('NO MEDIA DATA - RETURN')
@@ -75,11 +86,21 @@ const MediaDetails = () => {
                 fullPage
               />
             </div>
+
+            <PlayTrailerButton toggleShowVideo={toggleShowVideo} />
+
             <p className={styles.tagline}>{mediaData.tagline}</p>
             <Overview mediaData={mediaData} />
             <KeywordsList mediaType={mediaType} mediaId={mediaId} />
           </div>
         </div>
+        {/* Trailer */}
+        {mediaTrailerUrl && showVideo && (
+          <TrailerVideo
+            mediaTrailerUrl={mediaTrailerUrl}
+            toggleShowVideo={toggleShowVideo}
+          />
+        )}
         {/* Media cast */}
         <Cast castData={castData?.cast} mediaType={mediaType} />
       </section>

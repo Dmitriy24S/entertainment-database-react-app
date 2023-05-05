@@ -1,0 +1,19 @@
+.trailerButton {
+  display: flex;
+  align-self: start;
+  gap: 0.25rem;
+  padding: 0.5rem 0.7rem;
+  background-color: hsl(224, 38%, 23%);
+  color: white;
+  border-radius: 6px;
+  margin-top: 2rem;
+  transition: background-color 150ms ease-out;
+  &:hover,
+  &:focus-visible {
+    background-color: hsl(224, 39%, 28%);
+  }
+
+  svg {
+    font-size: 1.5rem;
+  }
+}

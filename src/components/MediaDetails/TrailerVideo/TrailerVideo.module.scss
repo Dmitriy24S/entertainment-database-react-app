@@ -1,0 +1,50 @@
+.videoContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+.video {
+  position: fixed;
+  z-index: 1001;
+  top: 50%;
+  transform: translateY(-50%);
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  max-height: 80vh;
+  min-height: 300px;
+  min-width: 300px;
+  aspect-ratio: 16/9;
+  max-width: 80%;
+}
+
+.backdrop {
+  position: fixed;
+  z-index: 1000;
+  inset: 0;
+  background-color: black;
+  opacity: 80%;
+}
+
+.closeVideoButton {
+  border-radius: 9999px;
+  background-color: rgba(255, 255, 255, 0);
+  opacity: 100%;
+  transition: background-color 150ms ease-out;
+  padding: 10px;
+  &:hover,
+  &:focus-visible {
+    background-color: rgba(255, 255, 255, 30%);
+  }
+  position: fixed;
+  top: 2rem;
+  right: 2rem;
+  z-index: 1001;
+  font-size: 2rem;
+  color: white;
+}

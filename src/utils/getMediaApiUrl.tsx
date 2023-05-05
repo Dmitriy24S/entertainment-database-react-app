@@ -25,3 +25,7 @@ export const getTVDetailsApiUrl = (mediaId: string) => {
   const castUrl = `${apiBaseUrl}/tv/${mediaId}/aggregate_credits?api_key=${apiKey}`
   return { detailsUrl, castUrl }
 }
+
+export const getMediaVideoApiUrl = (mediaType: MediaType, mediaId: string) => {
+  return `${apiBaseUrl}/${mediaType}/${mediaId}/videos?api_key=${apiKey}&language=en-US`
+}
