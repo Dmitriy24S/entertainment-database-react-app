@@ -23,6 +23,12 @@ const Cast: React.FC<CastProps> = ({ castData, mediaType }) => {
               src={`${apiCastProfileImgUrl}${person.profile_path}`}
               alt={person.name}
               loading='lazy'
+              // no img case: hide error icon, keep spacing
+              onError={(e) => {
+                // e.target.style.visibility = 'hidden'
+                const el = e.target as HTMLImageElement
+                el.style.visibility = 'hidden'
+              }}
             />
             <div className={styles.roleContainer}>
               <h4 className={styles.actorName}>{person.name}</h4>
