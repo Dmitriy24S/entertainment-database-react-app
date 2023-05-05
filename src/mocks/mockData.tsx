@@ -31,6 +31,7 @@ export const mockMediaItemData: CombinedMediaType = {
   name: 'The TV Show Name',
   media_type: 'tv',
   first_air_date: '2022-01-01',
+  episode_run_time: [60],
   last_episode_to_air: {
     runtime: '60',
   },

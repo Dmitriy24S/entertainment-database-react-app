@@ -25,8 +25,9 @@ const QuickInfo: React.FC<QuickInfoProps> = ({ releaseDate, mediaData, mediaType
       <li className={styles.runtime}>
         {mediaType === MediaType.MOVIE
           ? getRuntime(mediaData.runtime)
-          : `${mediaData.last_episode_to_air.runtime}min`}
-        {/* : `${mediaData.episode_run_time[0]}min`} */}
+          : `${
+              mediaData?.episode_run_time[0] || mediaData?.last_episode_to_air.runtime
+            } min`}
       </li>
     </ul>
   )

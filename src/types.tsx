@@ -59,6 +59,7 @@ type TV = {
   vote_count: number
   origin_country: string[]
   release_date: string
+  episode_run_time: number[]
   last_episode_to_air: {
     runtime: string
   }
