@@ -1,40 +1,38 @@
-import axios from 'axios'
-import { useEffect, useState } from 'react'
-import { MediaType } from '../../../types'
-import styles from './KeywordsList.module.scss'
-
-const apiUrl = 'https://api.themoviedb.org/3'
-const apiKey = 'b0574de2203f781e1f1bc82abcf3cd8d'
+import axios from "axios";
+import { useEffect, useState } from "react";
+import { MediaType } from "../../../types";
+import { apiBaseUrl } from "../../../const/apiBaseUrl";
+import styles from "./KeywordsList.module.scss";
 
 const KeywordsList = ({
   mediaType,
   mediaId,
 }: {
-  mediaType: MediaType
-  mediaId: string
+  mediaType: MediaType;
+  mediaId: string;
 }) => {
-  const [mediaKeywords, setMediaKeywords] = useState([])
+  const [mediaKeywords, setMediaKeywords] = useState([]);
 
   useEffect(() => {
     const getKeywords = async () => {
       try {
         const data = await axios.get(
-          `${apiUrl}/${mediaType}/${mediaId}/keywords?api_key=${apiKey}&language=en-US`
-        )
-        console.log('getKeywords data', data)
+          `${apiBaseUrl}/${mediaType}/${mediaId}/keywords?api_key=${process.env.REACT_APP_API_KEY}&language=en-US`
+        );
+        console.log("getKeywords data", data);
         setMediaKeywords(
           mediaType === MediaType.MOVIE ? data.data.keywords : data.data.results
-        )
+        );
       } catch (error) {
-        console.log('getKeywords error', error)
-        alert(`getKeywords error: ${error}`)
+        console.log("getKeywords error", error);
+        alert(`getKeywords error: ${error}`);
       }
-    }
+    };
 
-    getKeywords()
-  }, [mediaId, mediaType])
+    getKeywords();
+  }, [mediaId, mediaType]);
 
-  if (!mediaKeywords || mediaKeywords.length === 0) return null
+  if (!mediaKeywords || mediaKeywords.length === 0) return null;
 
   return (
     <div className={styles.container}>
@@ -46,7 +44,7 @@ const KeywordsList = ({
         ))}
       </ul>
     </div>
-  )
-}
+  );
+};
 
-export default KeywordsList
+export default KeywordsList;
